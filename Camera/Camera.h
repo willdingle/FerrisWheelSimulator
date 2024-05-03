@@ -15,16 +15,17 @@ public:
 	Camera(glm::vec3 setPos)
 	{
 		pos = setPos;
-		front = glm::vec3(0.0f, 0.01, -1.0f);
+		front = glm::vec3(0.0f, 0.0f, -1.0f);
 		up = glm::vec3(0.0f, 1.0f, 0.0f);
 		dir = glm::vec3(0.0f, 0.0f, 0.0f);
 		pitch = 0.0f;
 		yaw = -90.0f;
-		speed = 0.05f;
+		speed = 0.8f;
 	};
 
 	glm::mat4 calcMatrix();
 	void move(char dir);
 	void rotate(char dir);
-	
+	void setPitch(float setPitch);
+	void setYaw(float setYaw);
 };

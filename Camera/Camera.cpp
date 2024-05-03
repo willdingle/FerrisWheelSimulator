@@ -50,3 +50,13 @@ void Camera::rotate(char dir)
 	if (pitch < -89.0f)
 		pitch = -89.0f;
 }
+
+void Camera::setPitch(float setPitch)
+{
+	pitch = setPitch;
+}
+
+void Camera::setYaw(float setYaw)
+{
+	yaw = setYaw;
+}

@@ -51,6 +51,7 @@ COBJLoader objLoader;	//this object is used to load the 3d models.
 #include "Camera/Camera.h"
 Camera freeCam = Camera(glm::vec3(0.0f, 12.0f, 25.0f));
 Camera groundCam = Camera(glm::vec3(5.0f, 1.0f, 20.0f));
+Camera rideCam = Camera(glm::vec3(0.0f, 6.25f, 4.0f));
 Camera *currentCam;
 glm::mat4 ProjectionMatrix; // matrix for the orthographic projection
 
@@ -83,7 +84,7 @@ bool w = false;
 bool s = false;
 
 //Movement speed
-float ferrisSpeed = 0.0004f;
+float ferrisSpeed = 0.004f;
 
 //Sphere
 #include "Sphere\Sphere.h";
@@ -110,8 +111,23 @@ void display()
 	//amount = 0;
 	glUniform1f(glGetUniformLocation(myShader->GetProgramObjID(), "displacement"), amount);
 
+	//Ferris wheel speed
+	ferrisSpeed += 0.004f;
+
 	//translation and rotation for view
 	glm::mat4 viewingMatrix = currentCam->calcMatrix();
+	if (currentCam == &rideCam)
+	{
+		glm::mat4 viewMoving = glm::translate(viewingMatrix, glm::vec3(0.0f, 12.0f, 0.0f));
+		viewMoving = glm::rotate(viewMoving, -ferrisSpeed, glm::vec3(0, 0, 1.0));
+		viewMoving = glm::translate(viewMoving, glm::vec3(0.0f, -12.0f, 0.0f));
+
+		glm::mat4 viewCar = glm::translate(viewingMatrix, glm::vec3(0.0f, 6.25f, 0.0f));
+		viewCar = glm::rotate(viewCar, ferrisSpeed, glm::vec3(0, 0, 1.0));
+		viewCar = glm::translate(viewCar, glm::vec3(0.0f, -6.25f, 0.0f));
+
+		viewingMatrix = viewingMatrix * viewMoving * viewCar;
+	}
 	glUniformMatrix4fv(glGetUniformLocation(myShader->GetProgramObjID(), "ViewMatrix"), 1, GL_FALSE, &viewingMatrix[0][0]);
 
 	//Set the projection matrix in the shader
@@ -138,7 +154,6 @@ void display()
 	models[0].DrawElementsUsingVBO(myShader);
 
 	//Moving
-	ferrisSpeed += 0.0004f;
 	ModelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0, 12, 0));
 	ModelMatrix = glm::rotate(ModelMatrix, ferrisSpeed, glm::vec3(0, 0, 1.0));
 	ModelMatrix = glm::translate(ModelMatrix, glm::vec3(0, -12, 0));
@@ -242,6 +257,9 @@ void init()
 	}
 
 	currentCam = &freeCam;
+	groundCam.setPitch(20.0f);
+	groundCam.setYaw(-100.0f);
+	//rideCam.setYaw(90.0f);
 
 	/*
 	mySphere.setCentre(0, 0, 0);
@@ -359,6 +377,9 @@ void keyFuncUp(unsigned char key, int x, int y)
 	case 50:
 		currentCam = &groundCam;
 		break;
+	case 51:
+		currentCam = &rideCam;
+		break;
 	}
 }
 
@@ -368,18 +389,22 @@ void processKeys()
 	if (Left)
 	{
 		freeCam.rotate('l');
+		currentCam->rotate('l');
 	}
 	if (Right)
 	{
 		freeCam.rotate('r');
+		currentCam->rotate('r');
 	}
 	if (Up)
 	{
 		freeCam.rotate('u');
+		currentCam->rotate('u');
 	}
 	if (Down)
 	{
 		freeCam.rotate('d');
+		currentCam->rotate('d');
 	}
 
 	//Camera strafing
