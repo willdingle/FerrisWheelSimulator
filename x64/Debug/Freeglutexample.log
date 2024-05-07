@@ -1,5 +1,8 @@
-﻿  main.cpp
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\main.cpp(90,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\main.cpp(209,39): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\main.cpp(436,2): warning C4060: switch statement contains no 'case' or 'default' labels
-  Freeglutexample.vcxproj -> C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\x64\Debug\Freeglutexample.exe
+﻿  FerrisWheel.cpp
+  main.cpp
+C:\Users\willi\Desktop\FerrisWheelSimulator\main.cpp(70,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\willi\Desktop\FerrisWheelSimulator\main.cpp(160,29): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
+C:\Users\willi\Desktop\FerrisWheelSimulator\main.cpp(160,22): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
+C:\Users\willi\Desktop\FerrisWheelSimulator\main.cpp(160,15): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
+  Generating Code...
+  Freeglutexample.vcxproj -> C:\Users\willi\Desktop\FerrisWheelSimulator\x64\Debug\Freeglutexample.exe

@@ -3,7 +3,9 @@
 #include "..\glm\gtc\type_ptr.hpp"
 #include "..\glm\gtc\matrix_inverse.hpp"
 
-#include "../GL/glew.h"
+#include "..\GL\glew.h"
+
+#include "..\shaders\Shader.h"
 
 class Camera
 {
@@ -20,10 +22,11 @@ public:
 		dir = glm::vec3(0.0f, 0.0f, 0.0f);
 		pitch = 0.0f;
 		yaw = -90.0f;
-		speed = 0.8f;
+		speed = 0.08f;
 	};
 
 	glm::mat4 calcMatrix();
+	void render(CShader* shader);
 	void move(char dir);
 	void rotate(char dir);
 	void setPitch(float setPitch);

@@ -6,3 +6,4 @@ C:\Users\willi\Documents\Uni\Graphics 1\Coursework\x64\Debug\Freeglutexample.exe
 C:\Users\willi\Documents\Uni\2nd Year\Graphics\Coursework\x64\Debug\Freeglutexample.exe
 C:\Users\willi\Desktop\Coursework\x64\Debug\Freeglutexample.exe
 C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\x64\Debug\Freeglutexample.exe
+C:\Users\willi\Desktop\FerrisWheelSimulator\x64\Debug\Freeglutexample.exe

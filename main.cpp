@@ -18,34 +18,21 @@ using namespace std;
 
 #include "shaders\Shader.h"
 
-CShader* myShader;  ///shader object 
+//Shaders
+CShader* myShader;
 CShader* myBasicShader;
 
 //MODEL LOADING
 #include "3DStruct\threeDModel.h"
 #include "Obj\OBJLoader.h"
+#include "FerrisWheel\FerrisWheel.h"
 
 float amount = 0;
 float temp = 0.002f;
 
-CThreeDModel stand, moving, ground;
-CThreeDModel models[] = { stand, moving, ground };
-CThreeDModel Bcarriage, BLcarriage, BRcarriage, Lcarriage, Rcarriage, Tcarriage, TLcarriage, TRcarriage;
-CThreeDModel carriages[] = {Bcarriage, BLcarriage, BRcarriage, Lcarriage, Rcarriage, Tcarriage, TLcarriage, TRcarriage};
-string names[] = { "stand.obj", "moving.obj", "ground.obj"};
-string carriageNames[] = { "Bcarriage.obj", "BLcarriage.obj", "BRcarriage.obj", "Lcarriage.obj", "Rcarriage.obj", "Tcarriage.obj", "TLcarriage.obj", "TRcarriage.obj" };
-glm::vec3 carriagePositions[] = {
-	glm::vec3(0, 3.25, 0),
-	glm::vec3(-6.25, 5.85, 0),
-	glm::vec3(6.25, 5.85, 0),
-	glm::vec3(-8.75, 12, 0),
-	glm::vec3(8.75, 12, 0),
-	glm::vec3(0, 20.75, 0),
-	glm::vec3(-6.25, 18.15, 0),
-	glm::vec3(6.25, 18.15, 0)
-};
-COBJLoader objLoader;	//this object is used to load the 3d models.
-///END MODEL LOADING
+CThreeDModel ground;
+FerrisWheel ferrisWheel;
+COBJLoader objLoader;
 
 //Camera and view
 #include "Camera/Camera.h"
@@ -53,7 +40,7 @@ Camera freeCam = Camera(glm::vec3(0.0f, 12.0f, 30.0f));
 Camera groundCam = Camera(glm::vec3(10.0f, 1.0f, 30.0f));
 Camera rideCam = Camera(glm::vec3(0.0f, 3.25f, 5.0f));
 Camera *currentCam;
-glm::mat4 ProjectionMatrix; // matrix for the orthographic projection
+glm::mat4 ProjectionMatrix;
 
 //Material properties
 float Material_Ambient[4] = { 0.1f, 0.1f, 0.1f, 1.0f };
@@ -74,21 +61,17 @@ bool Left = false;
 bool Right = false;
 bool Up = false;
 bool Down = false;
-bool Home = false;
-bool End = false;
-bool o = false;
-bool p = false;
 bool a = false;
 bool d = false;
 bool w = false;
 bool s = false;
 
-//Movement speed
-float ferrisSpeed = 0.004f;
-
 //Sphere
 #include "Sphere\Sphere.h";
 Sphere mySphere, staticSphere;
+
+//delta time
+int oldTimeSinceStart = 0;
 
 //OPENGL FUNCTION PROTOTYPES
 void display();				//called in winmain to draw everything to the screen
@@ -96,11 +79,14 @@ void reshape(int width, int height);				//called when the window is resized
 void init();				//called in winmain when the program starts.
 void processKeys();         //called in winmain to process keyboard input
 void idle();		//idle function
-void switchCam(unsigned char key);
 
 /*************    START OF OPENGL FUNCTIONS   ****************/
 void display()
 {
+	int timeSinceStart = glutGet(GLUT_ELAPSED_TIME);
+	int deltaTime = timeSinceStart - oldTimeSinceStart;
+	oldTimeSinceStart = timeSinceStart;
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glUseProgram(myShader->GetProgramObjID());  // use the shader
 
@@ -108,14 +94,11 @@ void display()
 	amount += temp;
 	if (amount > 1.0f || amount < -1.5f)
 		temp = -temp;
-	//amount = 0;
+	amount = 0;
 	glUniform1f(glGetUniformLocation(myShader->GetProgramObjID(), "displacement"), amount);
 
-	//Ferris wheel speed
-	ferrisSpeed += 0.004f;
-
 	//translation and rotation for view
-	glm::mat4 viewingMatrix = currentCam->calcMatrix();
+	currentCam->render(myShader);
 	/*
 	if (currentCam == &rideCam)
 	{
@@ -130,7 +113,7 @@ void display()
 		viewingMatrix = viewingMatrix * viewMoving * viewCar;
 	}
 	*/
-	glUniformMatrix4fv(glGetUniformLocation(myShader->GetProgramObjID(), "ViewMatrix"), 1, GL_FALSE, &viewingMatrix[0][0]);
+	glm::mat4 viewingMatrix = currentCam->calcMatrix();
 
 	//Set the projection matrix in the shader
 	GLuint projMatLocation = glGetUniformLocation(myShader->GetProgramObjID(), "ProjectionMatrix");
@@ -147,48 +130,16 @@ void display()
 	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "material_specular"), 1, Material_Specular);
 	glUniform1f(glGetUniformLocation(myShader->GetProgramObjID(), "material_shininess"), Material_Shininess);
 
-	//Stand
+	//Ferris wheel
+	ferrisWheel.render(viewingMatrix, myShader);
+
+	//Ground
 	glm::mat4 ModelMatrix = glm::mat4(1.0f);
 	glm::mat4 ModelViewMatrix = viewingMatrix * ModelMatrix;
 	glUniformMatrix4fv(glGetUniformLocation(myShader->GetProgramObjID(), "ModelViewMatrix"), 1, GL_FALSE, &ModelViewMatrix[0][0]);
-	glm::mat3 NormalMatrix = glm::inverseTranspose(glm::mat3(ModelViewMatrix));
+	glm::mat4 NormalMatrix = glm::inverseTranspose(glm::mat3(ModelViewMatrix));
 	glUniformMatrix3fv(glGetUniformLocation(myShader->GetProgramObjID(), "NormalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
-	models[0].DrawElementsUsingVBO(myShader);
-
-	//Moving
-	ModelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0, 12, 0));
-	ModelMatrix = glm::rotate(ModelMatrix, ferrisSpeed, glm::vec3(0, 0, 1.0));
-	ModelMatrix = glm::translate(ModelMatrix, glm::vec3(0, -12, 0));
-	ModelViewMatrix = viewingMatrix * ModelMatrix;
-	glUniformMatrix4fv(glGetUniformLocation(myShader->GetProgramObjID(), "ModelViewMatrix"), 1, GL_FALSE, &ModelViewMatrix[0][0]);
-	NormalMatrix = glm::inverseTranspose(glm::mat3(ModelViewMatrix));
-	glUniformMatrix3fv(glGetUniformLocation(myShader->GetProgramObjID(), "NormalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
-	models[1].DrawElementsUsingVBO(myShader);
-
-	//Carriages
-	glm::mat4 CarriageMatrix = glm::mat4(1.0f);
-	glm::vec3 inverseCarPosition = glm::vec3(0, 0, 0);
-	for (int i = 0; i < 8; i++)
-	{
-		CarriageMatrix = glm::translate(glm::mat4(1.0f), carriagePositions[i]);
-		CarriageMatrix = glm::rotate(CarriageMatrix, -ferrisSpeed, glm::vec3(0, 0, 1.0));
-		inverseCarPosition.x = -carriagePositions[i].x;
-		inverseCarPosition.y = -carriagePositions[i].y;
-		CarriageMatrix = glm::translate(CarriageMatrix, inverseCarPosition);
-		ModelViewMatrix = viewingMatrix * ModelMatrix * CarriageMatrix;
-		glUniformMatrix4fv(glGetUniformLocation(myShader->GetProgramObjID(), "ModelViewMatrix"), 1, GL_FALSE, &ModelViewMatrix[0][0]);
-		NormalMatrix = glm::inverseTranspose(glm::mat3(ModelViewMatrix));
-		glUniformMatrix3fv(glGetUniformLocation(myShader->GetProgramObjID(), "NormalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
-		carriages[i].DrawElementsUsingVBO(myShader);
-	}
-
-	//Ground
-	ModelMatrix = glm::mat4(1.0f);
-	ModelViewMatrix = viewingMatrix * ModelMatrix;
-	glUniformMatrix4fv(glGetUniformLocation(myShader->GetProgramObjID(), "ModelViewMatrix"), 1, GL_FALSE, &ModelViewMatrix[0][0]);
-	NormalMatrix = glm::inverseTranspose(glm::mat3(ModelViewMatrix));
-	glUniformMatrix3fv(glGetUniformLocation(myShader->GetProgramObjID(), "NormalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
-	models[2].DrawElementsUsingVBO(myShader);
+	ground.DrawElementsUsingVBO(myShader);
 
 	glFlush();
 	glutSwapBuffers();
@@ -207,8 +158,6 @@ void reshape(int width, int height)		// Resize the OpenGL window
 void init()
 {
 	glClearColor(0.529, 0.808, 0.922, 0.0);						//sets the clear colour to sky blue
-	//glClear(GL_COLOR_BUFFER_BIT) in the display function
-	//will clear the buffer to this colour
 	glEnable(GL_DEPTH_TEST);
 	//glEnable(GL_CULL_FACE);
 
@@ -230,32 +179,18 @@ void init()
 
 	glEnable(GL_TEXTURE_2D);
 
-	//Load all models except carriages
-	for (int i = 0; i < 3; i++)
-	{
-		if (objLoader.LoadModel("FerrisWheel/" + names[i]))//returns true if the model is loaded
-		{
-			models[i].ConstructModelFromOBJLoader(objLoader);
-			models[i].InitVBO(myShader);
-		}
-		else
-		{
-			cout << " model failed to load " << endl;
-		}
-	}
+	//Initialise ferris wheel
+	ferrisWheel = FerrisWheel(objLoader, myShader);
 
-	//Load carriages
-	for (int i = 0; i < 8; i++)
+	//Load ground
+	if (objLoader.LoadModel("FerrisWheel/ground.obj"))//returns true if the model is loaded
 	{
-		if (objLoader.LoadModel("FerrisWheel/" + carriageNames[i]))//returns true if the model is loaded
-		{
-			carriages[i].ConstructModelFromOBJLoader(objLoader);
-			carriages[i].InitVBO(myShader);
-		}
-		else
-		{
-			cout << " model failed to load " << endl;
-		}
+		ground.ConstructModelFromOBJLoader(objLoader);
+		ground.InitVBO(myShader);
+	}
+	else
+	{
+		std::cout << " model failed to load " << std::endl;
 	}
 
 	currentCam = &freeCam;
@@ -291,10 +226,10 @@ void special(int key, int x, int y)
 		Down = true;
 		break;
 	case GLUT_KEY_HOME:
-		Home = true;
+		ferrisWheel.on();
 		break;
 	case GLUT_KEY_END:
-		End = true;
+		ferrisWheel.off();
 		break;
 	}
 }
@@ -315,12 +250,6 @@ void specialUp(int key, int x, int y)
 	case GLUT_KEY_DOWN:
 		Down = false;
 		break;
-	case GLUT_KEY_HOME:
-		Home = false;
-		break;
-	case GLUT_KEY_END:
-		End = false;
-		break;
 	}
 }
 
@@ -328,12 +257,6 @@ void keyFunc(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
-	case 111: //o = y up
-		o = true;
-		break;
-	case 112: //p = y down
-		p = true;
-		break;
 	case 97: //a = left
 		a = true;
 		break;
@@ -346,7 +269,20 @@ void keyFunc(unsigned char key, int x, int y)
 	case 115: //s = move towards camera
 		s = true;
 		break;
-	case 49:
+	case 49: //1 = free camera
+		currentCam = &freeCam;
+		break;
+	case 50: //2 = ground camera
+		currentCam = &groundCam;
+		break;
+	case 51: //3 = ride camera
+		currentCam = &rideCam;
+		break;
+	case 45:
+		ferrisWheel.adjustMaxSpeed('d');
+		break;
+	case 61:
+		ferrisWheel.adjustMaxSpeed('u');
 		break;
 	}
 }
@@ -355,12 +291,6 @@ void keyFuncUp(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
-	case 111: //o = y up
-		o = false;
-		break;
-	case 112: //p = y down
-		p = false;
-		break;
 	case 97: //a = left
 		a = false;
 		break;
@@ -373,15 +303,6 @@ void keyFuncUp(unsigned char key, int x, int y)
 	case 115: //s = move towards camera
 		s = false;
 		break;
-	case 49:
-		currentCam = &freeCam;
-		break;
-	case 50:
-		currentCam = &groundCam;
-		break;
-	case 51:
-		currentCam = &rideCam;
-		break;
 	}
 }
 
@@ -390,49 +311,37 @@ void processKeys()
 	//Camera rotations
 	if (Left)
 	{
-		freeCam.rotate('l');
 		currentCam->rotate('l');
 	}
 	if (Right)
 	{
-		freeCam.rotate('r');
 		currentCam->rotate('r');
 	}
 	if (Up)
 	{
-		freeCam.rotate('u');
 		currentCam->rotate('u');
 	}
 	if (Down)
 	{
-		freeCam.rotate('d');
 		currentCam->rotate('d');
 	}
 
-	//Camera strafing
-	if (a)
+	//Camera strafing (free camera only)
+	if (currentCam == &freeCam && a)
 	{
 		freeCam.move('a');
 	}
-	if (d)
+	if (currentCam == &freeCam && d)
 	{
 		freeCam.move('d');
 	}
-	if (w)
+	if (currentCam == &freeCam && w)
 	{
 		freeCam.move('w');
 	}
-	if (s)
+	if (currentCam == &freeCam && s)
 	{
 		freeCam.move('s');
-	}
-}
-
-void switchCam(unsigned char key)
-{
-	switch (key)
-	{
-		
 	}
 }
 
@@ -452,23 +361,23 @@ int main(int argc, char** argv)
 	glutInitWindowPosition(100, 100);
 	glutCreateWindow("Ferris Wheel Simulator");
 
-	//This initialises glew - it must be called after the window is created.
+	//Initialise glew
 	GLenum err = glewInit();
 	if (GLEW_OK != err)
 	{
 		cout << " GLEW ERROR" << endl;
 	}
 
-	//Check the OpenGL version being used
+	//OpenGL version
 	int OpenGLVersion[2];
 	glGetIntegerv(GL_MAJOR_VERSION, &OpenGLVersion[0]);
 	glGetIntegerv(GL_MINOR_VERSION, &OpenGLVersion[1]);
 	cout << OpenGLVersion[0] << " " << OpenGLVersion[1] << endl;
 
-	//initialise the objects for rendering
+	//Initialise function
 	init();
 
-	//Specify glut functions
+	//Glut functions
 	glutReshapeFunc(reshape);
 	glutDisplayFunc(display);
 	glutSpecialFunc(special);
@@ -477,7 +386,7 @@ int main(int argc, char** argv)
 	glutKeyboardUpFunc(keyFuncUp);
 	glutIdleFunc(idle);
 
-	//starts the main loop. Program loops and calls callback functions as appropriate.
+	//Main loop
 	glutMainLoop();
 
 	return 0;

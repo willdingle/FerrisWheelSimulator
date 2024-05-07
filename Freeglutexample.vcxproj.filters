@@ -37,6 +37,9 @@
     <ClCompile Include="Camera\Camera.cpp">
       <Filter>headers\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="FerrisWheel\FerrisWheel.cpp">
+      <Filter>headers\FerrisWheel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3dStruct\threeDModel.h">
@@ -74,6 +77,9 @@
     </ClInclude>
     <ClInclude Include="Camera\Camera.h">
       <Filter>headers\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="FerrisWheel\FerrisWheel.h">
+      <Filter>headers\FerrisWheel</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +124,9 @@
     </Filter>
     <Filter Include="headers\Camera">
       <UniqueIdentifier>{80fc6a9b-d00b-4ebb-8639-e94cb2f0bff2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="headers\FerrisWheel">
+      <UniqueIdentifier>{38c557e3-b0e0-4e94-9394-d0019638754c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

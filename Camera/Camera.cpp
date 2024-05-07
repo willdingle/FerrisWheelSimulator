@@ -28,6 +28,11 @@ void Camera::move(char dir)
 	}
 }
 
+void Camera::render(CShader* shader)
+{
+	glUniformMatrix4fv(glGetUniformLocation(shader->GetProgramObjID(), "ViewMatrix"), 1, GL_FALSE, &calcMatrix()[0][0]);
+}
+
 void Camera::rotate(char dir)
 {
 	switch (dir)

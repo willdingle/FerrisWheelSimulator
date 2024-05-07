@@ -22,6 +22,7 @@
     <ClInclude Include="3dStruct\threeDModel.h" />
     <ClInclude Include="Box\Box.h" />
     <ClInclude Include="Camera\Camera.h" />
+    <ClInclude Include="FerrisWheel\FerrisWheel.h" />
     <ClInclude Include="Images\FreeImage.h" />
     <ClInclude Include="Images\ImageLoading.h" />
     <ClInclude Include="Obj\OBJLoader.h" />
@@ -36,6 +37,7 @@
     <ClCompile Include="3dStruct\threeDModel.cpp" />
     <ClCompile Include="Box\Box.cpp" />
     <ClCompile Include="Camera\Camera.cpp" />
+    <ClCompile Include="FerrisWheel\FerrisWheel.cpp" />
     <ClCompile Include="Images\ImageLoading.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Obj\OBJLoader.cpp" />
