@@ -35,23 +35,23 @@ CThreeDModel carriages[] = {Bcarriage, BLcarriage, BRcarriage, Lcarriage, Rcarri
 string names[] = { "stand.obj", "moving.obj", "ground.obj"};
 string carriageNames[] = { "Bcarriage.obj", "BLcarriage.obj", "BRcarriage.obj", "Lcarriage.obj", "Rcarriage.obj", "Tcarriage.obj", "TLcarriage.obj", "TRcarriage.obj" };
 glm::vec3 carriagePositions[] = {
-	glm::vec3(0, 6.25, 0),
-	glm::vec3(-4, 8, 0),
-	glm::vec3(4, 8, 0),
-	glm::vec3(-5.75, 12, 0),
-	glm::vec3(5.75, 12, 0),
-	glm::vec3(0, 17.75, 0),
-	glm::vec3(-4, 16, 0),
-	glm::vec3(4, 16, 0)
+	glm::vec3(0, 3.25, 0),
+	glm::vec3(-6.25, 5.85, 0),
+	glm::vec3(6.25, 5.85, 0),
+	glm::vec3(-8.75, 12, 0),
+	glm::vec3(8.75, 12, 0),
+	glm::vec3(0, 20.75, 0),
+	glm::vec3(-6.25, 18.15, 0),
+	glm::vec3(6.25, 18.15, 0)
 };
 COBJLoader objLoader;	//this object is used to load the 3d models.
 ///END MODEL LOADING
 
 //Camera and view
 #include "Camera/Camera.h"
-Camera freeCam = Camera(glm::vec3(0.0f, 12.0f, 25.0f));
-Camera groundCam = Camera(glm::vec3(5.0f, 1.0f, 20.0f));
-Camera rideCam = Camera(glm::vec3(0.0f, 6.25f, 4.0f));
+Camera freeCam = Camera(glm::vec3(0.0f, 12.0f, 30.0f));
+Camera groundCam = Camera(glm::vec3(10.0f, 1.0f, 30.0f));
+Camera rideCam = Camera(glm::vec3(0.0f, 3.25f, 5.0f));
 Camera *currentCam;
 glm::mat4 ProjectionMatrix; // matrix for the orthographic projection
 
@@ -116,6 +116,7 @@ void display()
 
 	//translation and rotation for view
 	glm::mat4 viewingMatrix = currentCam->calcMatrix();
+	/*
 	if (currentCam == &rideCam)
 	{
 		glm::mat4 viewMoving = glm::translate(viewingMatrix, glm::vec3(0.0f, 12.0f, 0.0f));
@@ -128,6 +129,7 @@ void display()
 
 		viewingMatrix = viewingMatrix * viewMoving * viewCar;
 	}
+	*/
 	glUniformMatrix4fv(glGetUniformLocation(myShader->GetProgramObjID(), "ViewMatrix"), 1, GL_FALSE, &viewingMatrix[0][0]);
 
 	//Set the projection matrix in the shader
@@ -259,7 +261,7 @@ void init()
 	currentCam = &freeCam;
 	groundCam.setPitch(20.0f);
 	groundCam.setYaw(-100.0f);
-	//rideCam.setYaw(90.0f);
+	rideCam.setYaw(90.0f);
 
 	/*
 	mySphere.setCentre(0, 0, 0);
