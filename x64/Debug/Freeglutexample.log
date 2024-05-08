@@ -1,38 +1,4 @@
-﻿  threeDModel.cpp
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\3dStruct\threeDModel.cpp(720,19): warning C4267: '+=': conversion from 'size_t' to 'unsigned int', possible loss of data
-  Box.cpp
-  Camera.cpp
-  FerrisWheel.cpp
-  ImageLoading.cpp
-  main.cpp
+﻿  main.cpp
 C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\main.cpp(70,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\main.cpp(156,39): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
-  OBJLoader.cpp
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Obj\OBJLoader.cpp(177,19): warning C4477: 'sscanf_s' : format string '%s' requires an argument of type 'unsigned int', but variadic argument 2 has type 'unsigned __int64'
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Obj\OBJLoader.cpp(177,19): message : this argument is used as a buffer size
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Obj\OBJLoader.cpp(270,19): warning C4477: 'sscanf_s' : format string '%s' requires an argument of type 'unsigned int', but variadic argument 2 has type 'unsigned __int64'
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Obj\OBJLoader.cpp(270,19): message : this argument is used as a buffer size
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Obj\OBJLoader.cpp(412,19): warning C4477: 'sscanf_s' : format string '%s' requires an argument of type 'unsigned int', but variadic argument 2 has type 'unsigned __int64'
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Obj\OBJLoader.cpp(412,19): message : this argument is used as a buffer size
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Obj\OBJLoader.cpp(412,19): warning C4477: 'sscanf_s' : format string '%s' requires an argument of type 'unsigned int', but variadic argument 4 has type 'unsigned __int64'
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Obj\OBJLoader.cpp(412,19): message : this argument is used as a buffer size
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Obj\OBJLoader.cpp(422,19): warning C4477: 'sscanf_s' : format string '%s' requires an argument of type 'unsigned int', but variadic argument 2 has type 'unsigned __int64'
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Obj\OBJLoader.cpp(422,19): message : this argument is used as a buffer size
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Obj\OBJLoader.cpp(422,19): warning C4477: 'sscanf_s' : format string '%s' requires an argument of type 'unsigned int', but variadic argument 4 has type 'unsigned __int64'
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Obj\OBJLoader.cpp(422,19): message : this argument is used as a buffer size
-  Octree.cpp
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Octree\Octree.cpp(551,86): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Octree\Octree.cpp(551,77): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Octree\Octree.cpp(551,68): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Octree\Octree.cpp(551,59): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Octree\Octree.cpp(551,50): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Octree\Octree.cpp(551,41): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  Shader.cpp
-  Sphere.cpp
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\sphere\Sphere.cpp(90,31): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\sphere\Sphere.cpp(91,36): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  Vector3d.cpp
-  TextureHandler.cpp
-  IntersectionTests.cpp
-  Generating Code...
+C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\main.cpp(158,39): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
   Freeglutexample.vcxproj -> C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\x64\Debug\Freeglutexample.exe

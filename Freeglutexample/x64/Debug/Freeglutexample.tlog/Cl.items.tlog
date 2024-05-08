@@ -1,13 +1,13 @@
-C:\Users\dkv22zwu\Documents\FerrisWheelSimulator-main\3dStruct\threeDModel.cpp;C:\Users\dkv22zwu\Documents\FerrisWheelSimulator-main\Freeglutexample\x64\Debug\threeDModel.obj
-C:\Users\dkv22zwu\Documents\FerrisWheelSimulator-main\Box\Box.cpp;C:\Users\dkv22zwu\Documents\FerrisWheelSimulator-main\Freeglutexample\x64\Debug\Box.obj
-C:\Users\dkv22zwu\Documents\FerrisWheelSimulator-main\Camera\Camera.cpp;C:\Users\dkv22zwu\Documents\FerrisWheelSimulator-main\Freeglutexample\x64\Debug\Camera.obj
-C:\Users\dkv22zwu\Documents\FerrisWheelSimulator-main\FerrisWheel\FerrisWheel.cpp;C:\Users\dkv22zwu\Documents\FerrisWheelSimulator-main\Freeglutexample\x64\Debug\FerrisWheel.obj
-C:\Users\dkv22zwu\Documents\FerrisWheelSimulator-main\Images\ImageLoading.cpp;C:\Users\dkv22zwu\Documents\FerrisWheelSimulator-main\Freeglutexample\x64\Debug\ImageLoading.obj
-C:\Users\dkv22zwu\Documents\FerrisWheelSimulator-main\main.cpp;C:\Users\dkv22zwu\Documents\FerrisWheelSimulator-main\Freeglutexample\x64\Debug\main.obj
-C:\Users\dkv22zwu\Documents\FerrisWheelSimulator-main\Obj\OBJLoader.cpp;C:\Users\dkv22zwu\Documents\FerrisWheelSimulator-main\Freeglutexample\x64\Debug\OBJLoader.obj
-C:\Users\dkv22zwu\Documents\FerrisWheelSimulator-main\Octree\Octree.cpp;C:\Users\dkv22zwu\Documents\FerrisWheelSimulator-main\Freeglutexample\x64\Debug\Octree.obj
-C:\Users\dkv22zwu\Documents\FerrisWheelSimulator-main\shaders\Shader.cpp;C:\Users\dkv22zwu\Documents\FerrisWheelSimulator-main\Freeglutexample\x64\Debug\Shader.obj
-C:\Users\dkv22zwu\Documents\FerrisWheelSimulator-main\sphere\Sphere.cpp;C:\Users\dkv22zwu\Documents\FerrisWheelSimulator-main\Freeglutexample\x64\Debug\Sphere.obj
-C:\Users\dkv22zwu\Documents\FerrisWheelSimulator-main\Structures\Vector3d.cpp;C:\Users\dkv22zwu\Documents\FerrisWheelSimulator-main\Freeglutexample\x64\Debug\Vector3d.obj
-C:\Users\dkv22zwu\Documents\FerrisWheelSimulator-main\TextureHandler\TextureHandler.cpp;C:\Users\dkv22zwu\Documents\FerrisWheelSimulator-main\Freeglutexample\x64\Debug\TextureHandler.obj
-C:\Users\dkv22zwu\Documents\FerrisWheelSimulator-main\Utilities\IntersectionTests.cpp;C:\Users\dkv22zwu\Documents\FerrisWheelSimulator-main\Freeglutexample\x64\Debug\IntersectionTests.obj
+C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\3dStruct\threeDModel.cpp;C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Freeglutexample\x64\Debug\threeDModel.obj
+C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Box\Box.cpp;C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Freeglutexample\x64\Debug\Box.obj
+C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Camera\Camera.cpp;C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Freeglutexample\x64\Debug\Camera.obj
+C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\FerrisWheel\FerrisWheel.cpp;C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Freeglutexample\x64\Debug\FerrisWheel.obj
+C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Images\ImageLoading.cpp;C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Freeglutexample\x64\Debug\ImageLoading.obj
+C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\main.cpp;C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Freeglutexample\x64\Debug\main.obj
+C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Obj\OBJLoader.cpp;C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Freeglutexample\x64\Debug\OBJLoader.obj
+C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Octree\Octree.cpp;C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Freeglutexample\x64\Debug\Octree.obj
+C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\shaders\Shader.cpp;C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Freeglutexample\x64\Debug\Shader.obj
+C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\sphere\Sphere.cpp;C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Freeglutexample\x64\Debug\Sphere.obj
+C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Structures\Vector3d.cpp;C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Freeglutexample\x64\Debug\Vector3d.obj
+C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\TextureHandler\TextureHandler.cpp;C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Freeglutexample\x64\Debug\TextureHandler.obj
+C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Utilities\IntersectionTests.cpp;C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\Freeglutexample\x64\Debug\IntersectionTests.obj

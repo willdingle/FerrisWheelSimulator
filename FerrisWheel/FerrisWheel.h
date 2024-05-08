@@ -13,6 +13,7 @@ class FerrisWheel
 {
 private:
 	float maxSpeed, speed, targetSpeed, acceleration, angle;
+	int prevDelta;
 	CThreeDModel stand, moving;
 	std::string carriageNames[8] = { "Bcarriage.obj", "BLcarriage.obj", "BRcarriage.obj", "Lcarriage.obj", "Rcarriage.obj", "Tcarriage.obj", "TLcarriage.obj", "TRcarriage.obj" };
 	glm::vec3 carriagePositions[8] = {
@@ -32,9 +33,9 @@ private:
 public:
 	FerrisWheel();
 	FerrisWheel(COBJLoader objLoader, CShader* shader);
-	void render(glm::mat4 viewingMatrix, CShader* shader);
+	void render(glm::mat4 viewingMatrix, CShader* shader, int delta);
 	void adjustMaxSpeed(char dir);
-	void on();
+	void on(int delta);
 	void off();
 	float getAngle()
 	{

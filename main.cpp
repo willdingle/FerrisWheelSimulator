@@ -51,7 +51,8 @@ float Material_Shininess = 50;
 //Light Properties
 float Light_Ambient_And_Diffuse[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
 float Light_Specular[4] = { 1.0f,1.0f,1.0f,1.0f };
-float LightPos[4] = { 50.0f, 50.0f, 50.0f, 0.0f };
+float LightPos[4] = { 100.0f, 100.0f, 100.0f, 0.0f };
+float SecondLightPos[4] = { 0.0f, 50.0f, -50.0f, 0.0f };
 
 //Screen size
 int screenWidth = 1280, screenHeight = 720;
@@ -72,6 +73,8 @@ Sphere mySphere, staticSphere;
 
 //delta time
 int oldTimeSinceStart = 0;
+int timeSinceStart = 0;
+int deltaTime = 0;
 
 //OPENGL FUNCTION PROTOTYPES
 void display();				//called in winmain to draw everything to the screen
@@ -83,8 +86,8 @@ void idle();		//idle function
 /*************    START OF OPENGL FUNCTIONS   ****************/
 void display()
 {
-	int timeSinceStart = glutGet(GLUT_ELAPSED_TIME);
-	int deltaTime = timeSinceStart - oldTimeSinceStart;
+	timeSinceStart = glutGet(GLUT_ELAPSED_TIME);
+	deltaTime = timeSinceStart - oldTimeSinceStart;
 	oldTimeSinceStart = timeSinceStart;
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -127,7 +130,7 @@ void display()
 	glUniform1f(glGetUniformLocation(myShader->GetProgramObjID(), "material_shininess"), Material_Shininess);
 
 	//Ferris wheel
-	ferrisWheel.render(viewingMatrix, myShader);
+	ferrisWheel.render(viewingMatrix, myShader, deltaTime);
 
 	//Ground
 	glm::mat4 ModelMatrix = glm::mat4(1.0f);
@@ -156,7 +159,6 @@ void init()
 	glClearColor(0.529, 0.808, 0.922, 0.0); //sets the clear colour to sky blue
 	glEnable(GL_DEPTH_TEST);
 	//glEnable(GL_CULL_FACE);
-
 
 	myShader = new CShader();
 	//if(!myShader->CreateShaderProgram("BasicView", "glslfiles/basicTransformationsWithDisplacement.vert", "glslfiles/basicTransformationsWithDisplacement.frag"))
@@ -222,7 +224,7 @@ void special(int key, int x, int y)
 		Down = true;
 		break;
 	case GLUT_KEY_HOME:
-		ferrisWheel.on();
+		ferrisWheel.on(deltaTime);
 		break;
 	case GLUT_KEY_END:
 		ferrisWheel.off();
@@ -307,37 +309,37 @@ void processKeys()
 	//Camera rotations
 	if (Left)
 	{
-		currentCam->rotate('l');
+		currentCam->rotate('l', deltaTime);
 	}
 	if (Right)
 	{
-		currentCam->rotate('r');
+		currentCam->rotate('r', deltaTime);
 	}
 	if (Up)
 	{
-		currentCam->rotate('u');
+		currentCam->rotate('u', deltaTime);
 	}
 	if (Down)
 	{
-		currentCam->rotate('d');
+		currentCam->rotate('d', deltaTime);
 	}
 
 	//Camera strafing (free camera only)
 	if (currentCam == &freeCam && a)
 	{
-		freeCam.move('a');
+		freeCam.move('a', deltaTime);
 	}
 	if (currentCam == &freeCam && d)
 	{
-		freeCam.move('d');
+		freeCam.move('d', deltaTime);
 	}
 	if (currentCam == &freeCam && w)
 	{
-		freeCam.move('w');
+		freeCam.move('w', deltaTime);
 	}
 	if (currentCam == &freeCam && s)
 	{
-		freeCam.move('s');
+		freeCam.move('s', deltaTime);
 	}
 }
 

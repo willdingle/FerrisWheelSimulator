@@ -8,16 +8,18 @@ FerrisWheel::FerrisWheel()
 	targetSpeed = 0.0f;
 	acceleration = 0.0f;
 	BcarriageMat = glm::mat4(1.0f);
+	prevDelta = 0;
 }
 
 FerrisWheel::FerrisWheel(COBJLoader objLoader, CShader* shader)
 {
-	maxSpeed = 0.0004f;
+	maxSpeed = 0.003f;
 	speed = 0.0f;
 	angle = 0.0f;
 	targetSpeed = 0.0f;
-	acceleration = 0.000004f;
+	acceleration = 0.000008f;
 	BcarriageMat = glm::mat4(1.0f);
+	prevDelta = 0;
 
 	//Load stand
 	if (objLoader.LoadModel("FerrisWheel/stand.obj"))//returns true if the model is loaded
@@ -56,10 +58,8 @@ FerrisWheel::FerrisWheel(COBJLoader objLoader, CShader* shader)
 	}
 }
 
-void FerrisWheel::render(glm::mat4 viewingMatrix, CShader* shader)
+void FerrisWheel::render(glm::mat4 viewingMatrix, CShader* shader, int delta)
 {
-	//std::cout << "Speed:" << speed << ", Target:" << targetSpeed << std::endl;
-
 	//Stand
 	glm::mat4 ModelMatrix = glm::mat4(1.0f);
 	glm::mat4 ModelViewMatrix = viewingMatrix * ModelMatrix;
@@ -95,20 +95,28 @@ void FerrisWheel::render(glm::mat4 viewingMatrix, CShader* shader)
 		carriages[i].DrawElementsUsingVBO(shader);
 	}
 
-	if (speed < targetSpeed)
+	float deltaTargetSpeed = targetSpeed * delta;
+	if (prevDelta != 0)
+		speed = (speed / prevDelta) * delta;
+	float deltaAcceleration = acceleration * delta;
+
+	if (speed < deltaTargetSpeed)
 	{
-		speed += acceleration;
-		if (speed > targetSpeed)
-			speed = targetSpeed;
+		speed += deltaAcceleration;
+		if (speed > deltaTargetSpeed)
+			speed = deltaTargetSpeed;
 	}
-	if (speed > targetSpeed)
+	if (speed > deltaTargetSpeed)
 	{
-		speed -= acceleration;
-		if (speed < targetSpeed)
-			speed = targetSpeed;
+		speed -= deltaAcceleration;
+		if (speed < deltaTargetSpeed)
+			speed = deltaTargetSpeed;
 	}
 
+	std::cout << "Speed:" << speed << ", Target:" << deltaTargetSpeed << std::endl;
+
 	angle += speed;
+	prevDelta = delta;
 }
 
 void FerrisWheel::adjustMaxSpeed(char dir)
@@ -124,7 +132,7 @@ void FerrisWheel::adjustMaxSpeed(char dir)
 	}
 }
 
-void FerrisWheel::on()
+void FerrisWheel::on(int delta)
 {
 	targetSpeed = maxSpeed;
 }

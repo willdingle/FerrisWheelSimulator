@@ -9,21 +9,21 @@ glm::mat4 Camera::calcMatrix()
 	return glm::lookAt(pos, pos + front, up);
 }
 
-void Camera::move(char dir)
+void Camera::move(char dir, int delta)
 {
 	switch (dir)
 	{
 	case 'w':
-		pos += speed * front;
+		pos += (speed * delta) * front;
 		break;
 	case 's':
-		pos -= speed * front;
+		pos -= (speed * delta) * front;
 		break;
 	case 'a':
-		pos -= glm::normalize(glm::cross(front, up)) * speed;
+		pos -= glm::normalize(glm::cross(front, up)) * (speed * delta);
 		break;
 	case 'd':
-		pos += glm::normalize(glm::cross(front, up)) * speed;
+		pos += glm::normalize(glm::cross(front, up)) * (speed * delta);
 		break;
 	}
 }
@@ -38,21 +38,21 @@ void Camera::render(CShader* shader, glm::mat4 matrix)
 	glUniformMatrix4fv(glGetUniformLocation(shader->GetProgramObjID(), "ViewMatrix"), 1, GL_FALSE, &matrix[0][0]);
 }
 
-void Camera::rotate(char dir)
+void Camera::rotate(char dir, int delta)
 {
 	switch (dir)
 	{
 	case 'u':
-		pitch += speed;
+		pitch += speed * delta;
 		break;
 	case 'd':
-		pitch -= speed;
+		pitch -= speed * delta;
 		break;
 	case 'l':
-		yaw -= speed;
+		yaw -= speed * delta;
 		break;
 	case 'r':
-		yaw += speed;
+		yaw += speed * delta;
 		break;
 	}
 	if (pitch > 89.0f)
