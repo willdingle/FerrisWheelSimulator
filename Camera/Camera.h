@@ -27,8 +27,13 @@ public:
 
 	glm::mat4 calcMatrix();
 	void render(CShader* shader);
+	void render(CShader* shader, glm::mat4 matrix);
 	void move(char dir);
 	void rotate(char dir);
 	void setPitch(float setPitch);
 	void setYaw(float setYaw);
+	void setPos(glm::vec3 setPos)
+	{
+		pos = setPos;
+	}
 };

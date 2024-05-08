@@ -7,19 +7,17 @@ FerrisWheel::FerrisWheel()
 	speed = 0.0f;
 	targetSpeed = 0.0f;
 	acceleration = 0.0f;
-	starting = false;
-	stopping = false;
+	BcarriageMat = glm::mat4(1.0f);
 }
 
 FerrisWheel::FerrisWheel(COBJLoader objLoader, CShader* shader)
 {
-	maxSpeed = 0.004f;
+	maxSpeed = 0.0004f;
 	speed = 0.0f;
 	angle = 0.0f;
 	targetSpeed = 0.0f;
 	acceleration = 0.000004f;
-	starting = false;
-	stopping = false;
+	BcarriageMat = glm::mat4(1.0f);
 
 	//Load stand
 	if (objLoader.LoadModel("FerrisWheel/stand.obj"))//returns true if the model is loaded
@@ -60,7 +58,7 @@ FerrisWheel::FerrisWheel(COBJLoader objLoader, CShader* shader)
 
 void FerrisWheel::render(glm::mat4 viewingMatrix, CShader* shader)
 {
-	std::cout << "Speed:" << speed << ", Target:" << targetSpeed << std::endl;
+	//std::cout << "Speed:" << speed << ", Target:" << targetSpeed << std::endl;
 
 	//Stand
 	glm::mat4 ModelMatrix = glm::mat4(1.0f);

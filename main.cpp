@@ -94,26 +94,22 @@ void display()
 	amount += temp;
 	if (amount > 1.0f || amount < -1.5f)
 		temp = -temp;
-	amount = 0;
+	//amount = 0;
 	glUniform1f(glGetUniformLocation(myShader->GetProgramObjID(), "displacement"), amount);
 
 	//translation and rotation for view
-	currentCam->render(myShader);
-	/*
+	glm::mat4 viewingMatrix = glm::mat4(1.0f);
 	if (currentCam == &rideCam)
 	{
-		glm::mat4 viewMoving = glm::translate(viewingMatrix, glm::vec3(0.0f, 12.0f, 0.0f));
-		viewMoving = glm::rotate(viewMoving, -ferrisSpeed, glm::vec3(0, 0, 1.0));
-		viewMoving = glm::translate(viewMoving, glm::vec3(0.0f, -12.0f, 0.0f));
-
-		glm::mat4 viewCar = glm::translate(viewingMatrix, glm::vec3(0.0f, 6.25f, 0.0f));
-		viewCar = glm::rotate(viewCar, ferrisSpeed, glm::vec3(0, 0, 1.0));
-		viewCar = glm::translate(viewCar, glm::vec3(0.0f, -6.25f, 0.0f));
-
-		viewingMatrix = viewingMatrix * viewMoving * viewCar;
+		glm::mat4 ModelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0, 12, 0));
+		ModelMatrix = glm::rotate(ModelMatrix, ferrisWheel.getAngle(), glm::vec3(0, 0, 1.0));
+		ModelMatrix = glm::translate(ModelMatrix, glm::vec3(0, -9.0f, 9.0f));
+		glm::vec3 camPos = glm::vec3(ModelMatrix[3][0], ModelMatrix[3][1], ModelMatrix[3][2]);
+		currentCam->setPos(camPos);
 	}
-	*/
-	glm::mat4 viewingMatrix = currentCam->calcMatrix();
+
+	currentCam->render(myShader);
+	viewingMatrix = currentCam->calcMatrix();
 
 	//Set the projection matrix in the shader
 	GLuint projMatLocation = glGetUniformLocation(myShader->GetProgramObjID(), "ProjectionMatrix");
@@ -157,7 +153,7 @@ void reshape(int width, int height)		// Resize the OpenGL window
 }
 void init()
 {
-	glClearColor(0.529, 0.808, 0.922, 0.0);						//sets the clear colour to sky blue
+	glClearColor(0.529, 0.808, 0.922, 0.0); //sets the clear colour to sky blue
 	glEnable(GL_DEPTH_TEST);
 	//glEnable(GL_CULL_FACE);
 
@@ -196,7 +192,7 @@ void init()
 	currentCam = &freeCam;
 	groundCam.setPitch(20.0f);
 	groundCam.setYaw(-100.0f);
-	rideCam.setYaw(90.0f);
+	rideCam.setYaw(180.0f);
 
 	/*
 	mySphere.setCentre(0, 0, 0);

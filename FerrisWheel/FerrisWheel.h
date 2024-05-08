@@ -13,7 +13,6 @@ class FerrisWheel
 {
 private:
 	float maxSpeed, speed, targetSpeed, acceleration, angle;
-	bool starting, stopping;
 	CThreeDModel stand, moving;
 	std::string carriageNames[8] = { "Bcarriage.obj", "BLcarriage.obj", "BRcarriage.obj", "Lcarriage.obj", "Rcarriage.obj", "Tcarriage.obj", "TLcarriage.obj", "TRcarriage.obj" };
 	glm::vec3 carriagePositions[8] = {
@@ -28,6 +27,7 @@ private:
 	};
 	CThreeDModel Bcarriage, BLcarriage, BRcarriage, Lcarriage, Rcarriage, Tcarriage, TLcarriage, TRcarriage;
 	CThreeDModel carriages[8] = { Bcarriage, BLcarriage, BRcarriage, Lcarriage, Rcarriage, Tcarriage, TLcarriage, TRcarriage };
+	glm::mat4 BcarriageMat;
 
 public:
 	FerrisWheel();
@@ -36,4 +36,12 @@ public:
 	void adjustMaxSpeed(char dir);
 	void on();
 	void off();
+	float getAngle()
+	{
+		return angle;
+	}
+	glm::mat4 getBcarriageMat()
+	{
+		return BcarriageMat;
+	}
 };
