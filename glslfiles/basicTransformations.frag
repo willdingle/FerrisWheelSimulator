@@ -5,6 +5,7 @@ in  vec3 ex_Normal;  //normal arriving from the vertex
 
 out vec4 out_Color;   //colour for the pixel
 in vec3 ex_LightDir;  //light direction arriving from the vertex
+in vec3 ex_LightDir2;
 
 in vec3 ex_PositionEye;
 
@@ -43,6 +44,26 @@ void main(void)
 	NdotL = max(dot(n, L),0.0);
 
 	color = light_ambient * material_ambient;
+	
+	if(NdotL > 0.0) 
+	{
+		color += (light_ambient * material_diffuse * NdotL);
+	}
+
+	color += material_specular * light_specular * pow(RdotV, material_shininess);
+
+	//Calculate 2nd lighting
+	n = normalize(ex_Normal);
+	L = normalize(ex_LightDir2);
+
+	v = normalize(-ex_PositionEye);
+	r = normalize(-reflect(L, n));
+	
+	RdotV = max(0.0, dot(r, v));
+
+	NdotL = max(dot(n, L),0.0);
+
+	color += light_ambient * material_ambient;
 	
 	if(NdotL > 0.0) 
 	{

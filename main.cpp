@@ -30,7 +30,7 @@ CShader* myBasicShader;
 float amount = 0;
 float temp = 0.002f;
 
-CThreeDModel ground;
+CThreeDModel ground, lightTestObj;
 FerrisWheel ferrisWheel;
 COBJLoader objLoader;
 
@@ -52,7 +52,7 @@ float Material_Shininess = 50;
 float Light_Ambient_And_Diffuse[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
 float Light_Specular[4] = { 1.0f,1.0f,1.0f,1.0f };
 float LightPos[4] = { 100.0f, 100.0f, 100.0f, 0.0f };
-float SecondLightPos[4] = { 0.0f, 50.0f, -50.0f, 0.0f };
+float SecondLightPos[4] = { -100.0f, 100.0f, -100.0f, 0.0f };
 
 //Screen size
 int screenWidth = 1280, screenHeight = 720;
@@ -118,17 +118,6 @@ void display()
 	GLuint projMatLocation = glGetUniformLocation(myShader->GetProgramObjID(), "ProjectionMatrix");
 	glUniformMatrix4fv(projMatLocation, 1, GL_FALSE, &ProjectionMatrix[0][0]);
 
-	//Light properties
-	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "LightPos"), 1, LightPos);
-	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "light_ambient"), 1, Light_Ambient_And_Diffuse);
-	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "light_diffuse"), 1, Light_Ambient_And_Diffuse);
-	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "light_specular"), 1, Light_Specular);
-
-	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "material_ambient"), 1, Material_Ambient);
-	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "material_diffuse"), 1, Material_Diffuse);
-	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "material_specular"), 1, Material_Specular);
-	glUniform1f(glGetUniformLocation(myShader->GetProgramObjID(), "material_shininess"), Material_Shininess);
-
 	//Ferris wheel
 	ferrisWheel.render(viewingMatrix, myShader, deltaTime);
 
@@ -139,6 +128,26 @@ void display()
 	glm::mat4 NormalMatrix = glm::inverseTranspose(glm::mat3(ModelViewMatrix));
 	glUniformMatrix3fv(glGetUniformLocation(myShader->GetProgramObjID(), "NormalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
 	ground.DrawElementsUsingVBO(myShader);
+
+	//Light Test Object
+	ModelMatrix = glm::mat4(1.0f);
+	ModelViewMatrix = viewingMatrix * ModelMatrix;
+	glUniformMatrix4fv(glGetUniformLocation(myShader->GetProgramObjID(), "ModelViewMatrix"), 1, GL_FALSE, &ModelViewMatrix[0][0]);
+	NormalMatrix = glm::inverseTranspose(glm::mat3(ModelViewMatrix));
+	glUniformMatrix3fv(glGetUniformLocation(myShader->GetProgramObjID(), "NormalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
+	lightTestObj.DrawElementsUsingVBO(myShader);
+
+	//Light properties
+	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "LightPos"), 1, LightPos);
+	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "SecondLightPos"), 1, SecondLightPos);
+	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "light_ambient"), 1, Light_Ambient_And_Diffuse);
+	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "light_diffuse"), 1, Light_Ambient_And_Diffuse);
+	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "light_specular"), 1, Light_Specular);
+
+	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "material_ambient"), 1, Material_Ambient);
+	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "material_diffuse"), 1, Material_Diffuse);
+	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "material_specular"), 1, Material_Specular);
+	glUniform1f(glGetUniformLocation(myShader->GetProgramObjID(), "material_shininess"), Material_Shininess);
 
 	glFlush();
 	glutSwapBuffers();
@@ -185,6 +194,17 @@ void init()
 	{
 		ground.ConstructModelFromOBJLoader(objLoader);
 		ground.InitVBO(myShader);
+	}
+	else
+	{
+		std::cout << " model failed to load " << std::endl;
+	}
+
+	//Load lightTestObj
+	if (objLoader.LoadModel("FerrisWheel/lightTestObj.obj"))//returns true if the model is loaded
+	{
+		lightTestObj.ConstructModelFromOBJLoader(objLoader);
+		lightTestObj.InitVBO(myShader);
 	}
 	else
 	{
