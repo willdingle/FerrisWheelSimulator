@@ -7,11 +7,14 @@
 
 #include "..\shaders\Shader.h"
 
+#include "..\Box\Box.h"
+
 class Camera
 {
 private:
 	glm::vec3 pos, front, up, dir;
 	float pitch, yaw, speed;
+	CBox ferrisCollision;
 
 public:
 	Camera(glm::vec3 setPos)
@@ -23,11 +26,12 @@ public:
 		pitch = 0.0f;
 		yaw = -90.0f;
 		speed = 0.08f;
+		ferrisCollision = CBox();
 	};
 
 	glm::mat4 calcMatrix();
 	void render(CShader* shader);
-	void render(CShader* shader, glm::mat4 matrix);
+	bool collisionCheck(CShader* shader);
 	void move(char dir, int delta);
 	void rotate(char dir, int delta);
 	void setPitch(float setPitch);
@@ -35,5 +39,13 @@ public:
 	void setPos(glm::vec3 setPos)
 	{
 		pos = setPos;
+	}
+	glm::vec3 getPos()
+	{
+		return pos;
+	}
+	glm::vec3 getFront()
+	{
+		return front;
 	}
 };

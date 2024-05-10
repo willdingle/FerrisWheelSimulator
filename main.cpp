@@ -37,7 +37,7 @@ COBJLoader objLoader;
 //Camera and view
 #include "Camera/Camera.h"
 Camera freeCam = Camera(glm::vec3(0.0f, 12.0f, 30.0f));
-Camera groundCam = Camera(glm::vec3(10.0f, 1.0f, 30.0f));
+Camera groundCam = Camera(glm::vec3(10.0f, 1.5f, 30.0f));
 Camera rideCam = Camera(glm::vec3(0.0f, 3.25f, 5.0f));
 Camera *currentCam;
 glm::mat4 ProjectionMatrix;
