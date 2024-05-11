@@ -67,6 +67,9 @@ bool d = false;
 bool w = false;
 bool s = false;
 
+//Boolean for viewing collision boxes
+bool viewCollisions = false;
+
 //Sphere
 #include "Sphere\Sphere.h";
 Sphere mySphere, staticSphere;
@@ -113,6 +116,8 @@ void display()
 
 	currentCam->render(myShader);
 	viewingMatrix = currentCam->calcMatrix();
+	if (viewCollisions)
+		currentCam->viewCollisionBoxes(myShader, ferrisWheel.getAngle());
 
 	//Set the projection matrix in the shader
 	GLuint projMatLocation = glGetUniformLocation(myShader->GetProgramObjID(), "ProjectionMatrix");
@@ -248,6 +253,12 @@ void special(int key, int x, int y)
 		break;
 	case GLUT_KEY_END:
 		ferrisWheel.off();
+		break;
+	case GLUT_KEY_INSERT:
+		if (viewCollisions)
+			viewCollisions = false;
+		else
+			viewCollisions = true;
 		break;
 	}
 }

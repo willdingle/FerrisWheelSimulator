@@ -12,14 +12,32 @@ glm::mat4 Camera::calcMatrix()
 void Camera::render(CShader* shader)
 {
 	glUniformMatrix4fv(glGetUniformLocation(shader->GetProgramObjID(), "ViewMatrix"), 1, GL_FALSE, &calcMatrix()[0][0]);
-	collisionCheck(shader);
 }
 
-bool Camera::collisionCheck(CShader* shader)
+void Camera::viewCollisionBoxes(CShader* shader, float ferrisAngle)
 {
-	ferrisCollision.constructGeometry(shader, -10.75f, 0.0f, -5.0f, 10.75f, 22.25f, 6.5f);
-	ferrisCollision.render();
-	return true;
+	//ferrisCollision.constructGeometry(shader, -10.75f, 0.0f, -5.0f, 10.75f, 22.25f, 6.5f);
+	//ferrisCollision.render();
+	CBox baseCollision;
+	baseCollision.constructGeometry(shader, -10.0f, 0.0f, -5.0f, 10.0f, 1.0f, 5.0f);
+	baseCollision.render();
+
+	CBox standCollision;
+	standCollision.constructGeometry(shader, -5.0f, 1.0f, -1.0f, 5.0f, 12.5f, 1.0f);
+	standCollision.render();
+
+	CBox movingCollision;
+	movingCollision.constructGeometry(shader, -9.0f, 3.5f, 1.25f, 9.0f, 21.0f, 3.3f);
+	movingCollision.render();
+
+	glm::mat4 ModelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0, 12, 0));
+	ModelMatrix = glm::rotate(ModelMatrix, ferrisAngle, glm::vec3(0, 0, 1.0));
+	ModelMatrix = glm::translate(ModelMatrix, glm::vec3(0, -8.75f, 5.0f));
+	glm::vec3 testPos = glm::vec3(ModelMatrix[3][0], ModelMatrix[3][1], ModelMatrix[3][2]);
+
+	CBox carriageCollision;
+	carriageCollision.constructGeometry(shader, testPos.x - 2.0f, testPos.y - 1.5f, testPos.z - 1.75f, testPos.x + 2.0f, testPos.y + 1.5f, testPos.z + 1.75f);
+	carriageCollision.render();
 }
 
 void Camera::move(char dir, int delta)
