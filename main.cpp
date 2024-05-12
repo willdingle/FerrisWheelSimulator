@@ -52,7 +52,8 @@ float Material_Shininess = 50;
 float Light_Ambient_And_Diffuse[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
 float Light_Specular[4] = { 1.0f,1.0f,1.0f,1.0f };
 float LightPos[4] = { 100.0f, 100.0f, 100.0f, 0.0f };
-float SecondLightPos[4] = { -15.0f, 12.0f, 5.0f, 0.0f };
+float SecondLightPos[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+float ThirdLightPos[4] = { -100.0f, 100.0f, -100.0f };
 
 //Screen size
 int screenWidth = 1280, screenHeight = 720;
@@ -69,10 +70,6 @@ bool s = false;
 
 //Boolean for viewing collision boxes
 bool viewCollisions = false;
-
-//Sphere
-#include "Sphere\Sphere.h";
-Sphere mySphere, staticSphere;
 
 //delta time
 int oldTimeSinceStart = 0;
@@ -103,9 +100,8 @@ void display()
 	//amount = 0;
 	//glUniform1f(glGetUniformLocation(myShader->GetProgramObjID(), "displacement"), amount);
 
-	//Light properties
+	//Overhead light properties
 	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "LightPos"), 1, LightPos);
-	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "SecondLightPos"), 1, SecondLightPos);
 	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "light_ambient"), 1, Light_Ambient_And_Diffuse);
 	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "light_diffuse"), 1, Light_Ambient_And_Diffuse);
 	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "light_specular"), 1, Light_Specular);
@@ -114,6 +110,9 @@ void display()
 	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "material_diffuse"), 1, Material_Diffuse);
 	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "material_specular"), 1, Material_Specular);
 	glUniform1f(glGetUniformLocation(myShader->GetProgramObjID(), "material_shininess"), Material_Shininess);
+
+	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "SecondLightPos"), 1, SecondLightPos);
+	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "ThirdLightPos"), 1, ThirdLightPos);
 
 	//translation and rotation for view
 	glm::mat4 viewingMatrix = glm::mat4(1.0f);
@@ -129,6 +128,7 @@ void display()
 
 	currentCam->render(myShader);
 	viewingMatrix = currentCam->calcMatrix();
+	glUniformMatrix4fv(glGetUniformLocation(myShader->GetProgramObjID(), "ViewMatrix"), 1, GL_FALSE, &viewingMatrix[0][0]);
 	if (viewCollisions)
 		currentCam->viewCollisionBoxes(myBasicShader, ferrisWheel.getAngle(), ferrisWheel.getCarriagePositions());
 
@@ -219,18 +219,8 @@ void init()
 
 	currentCam = &freeCam;
 	groundCam.setPitch(20.0f);
-	groundCam.setYaw(-80.0f);
+	groundCam.setYaw(-70.0f);
 	rideCam.setYaw(180.0f);
-
-	/*
-	mySphere.setCentre(0, 0, 0);
-	mySphere.setRadius(8);
-	mySphere.constructGeometry(myBasicShader, 16);
-
-	staticSphere.setCentre(20, 5, 0);
-	staticSphere.setRadius(8);
-	staticSphere.constructGeometry(myBasicShader, 16);
-	*/
 }
 
 void special(int key, int x, int y)

@@ -154,5 +154,11 @@
     <None Include="glslfiles\dirTest.vert">
       <Filter>headers\glslfiles</Filter>
     </None>
+    <None Include="glslfiles\basicSpecularSpotlight.frag">
+      <Filter>headers\glslfiles</Filter>
+    </None>
+    <None Include="glslfiles\basicSpecularSpotlight.vert">
+      <Filter>headers\glslfiles</Filter>
+    </None>
   </ItemGroup>
 </Project>

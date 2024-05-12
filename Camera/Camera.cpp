@@ -26,9 +26,9 @@ void Camera::viewCollisionBoxes(CShader* shader, float ferrisAngle, glm::vec3 ca
 	baseCollision.constructGeometry(shader, -11.5f, 0.0f, -6.5f, 11.5f, 2.5f, 6.5f);
 	baseCollision.render();
 
-	//Left and right parts of stand collision
+	//Stand collision
 	CBox standCollision;
-	standCollision.constructGeometry(shader, -6.5f, 1.0f, -2.5f, 6.5f, 14.0f, 2.5f);
+	standCollision.constructGeometry(shader, -6.5f, 1.0f, -2.5f, 6.5f, 14.5f, 2.5f);
 	standCollision.render();
 
 	//Turning wheel collision
@@ -48,6 +48,11 @@ void Camera::viewCollisionBoxes(CShader* shader, float ferrisAngle, glm::vec3 ca
 		carriageCollisions[i].constructGeometry(shader, carriagePos.x - 3.5f, carriagePos.y - 2.0, carriagePos.z - 3.5f, carriagePos.x + 3.5f, carriagePos.y + 5.0f, carriagePos.z + 4.5f);
 		carriageCollisions[i].render();
 	}
+
+	//Light test object collision
+	CBox lightTestCollision;
+	lightTestCollision.constructGeometry(shader, -27.5f, 0.0f, -6.5f, -22.5f, 21.5f, 16.5f);
+	lightTestCollision.render();
 }
 
 void Camera::move(char dir, int delta, float ferrisAngle, glm::vec3 carriagePositions[])
@@ -86,7 +91,7 @@ void Camera::move(char dir, int delta, float ferrisAngle, glm::vec3 carriagePosi
 		)
 		pos = oldPos;
 	
-	//Left and right parts of stand collision
+	//Stand collision
 	if (
 		pos.x > -6.5f &&
 		pos.x < 6.5f &&
@@ -126,6 +131,17 @@ void Camera::move(char dir, int delta, float ferrisAngle, glm::vec3 carriagePosi
 			)
 			pos = oldPos;
 	}
+
+	//Light test object collision
+	if (
+		pos.x > -27.5f &&
+		pos.x < -22.5f &&
+		pos.y > 0.0f &&
+		pos.y < 21.5f &&
+		pos.z > -6.5f &&
+		pos.z < 16.5f
+		)
+		pos = oldPos;
 }
 
 void Camera::rotate(char dir, int delta)

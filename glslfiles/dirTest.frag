@@ -6,6 +6,8 @@ in  vec3 ex_Normal;  //normal arriving from the vertex
 out vec4 out_Color;   //colour for the pixel
 in vec3 ex_LightDir;  //light direction arriving from the vertex
 in vec3 ex_Light2Pos;
+in vec3 ex_Light3Pos;
+in vec3 ex_Light4Pos;
 
 in vec3 ex_PositionEye;
 
@@ -18,6 +20,9 @@ uniform vec4 material_diffuse;
 uniform vec4 material_specular;
 uniform float material_shininess;
 
+uniform vec4 light_ambient2;
+uniform vec4 light_diffuse2;
+
 uniform sampler2D DiffuseMap;
 
 void main(void)
@@ -29,48 +34,81 @@ void main(void)
 	//out_Color = vec4(ex_TexCoord,0.0,1.0); //show texture coords
 
 	//Calculate lighting
-	vec3 n, L;
-	vec4 color;
-	float NdotL;
+		vec3 n, L;
+		vec4 color;
+		float NdotL;
 	
-	n = normalize(ex_Normal);
-	L = normalize(ex_LightDir);
+		n = normalize(ex_Normal);
+		L = normalize(ex_LightDir);
 
-	vec3 v = normalize(-ex_PositionEye);
-	vec3 r = normalize(-reflect(L, n));
+		vec3 v = normalize(-ex_PositionEye);
+		vec3 r = normalize(-reflect(L, n));
 	
-	float RdotV = max(0.0, dot(r, v));
+		float RdotV = max(0.0, dot(r, v));
 
-	NdotL = max(dot(n, L),0.0);
+		NdotL = max(dot(n, L),0.0);
 
-	color = light_ambient * material_ambient;
+		color = light_ambient * material_ambient;
 	
-	if(NdotL > 0.0) 
-	{
-		color += (light_ambient * material_diffuse * NdotL);
-	}
+		if(NdotL > 0.0) 
+		{
+			color += (light_ambient * material_diffuse * NdotL);
+		}
 
-	color += material_specular * light_specular * pow(RdotV, material_shininess);
+		color += material_specular * light_specular * pow(RdotV, material_shininess);
 	
-	//Calculate 2nd lighting
-	n = normalize(ex_Normal);
-	vec3 test = ex_Light2Pos - ex_PositionEye;
-	L = normalize(test);
-	v = normalize(-ex_PositionEye);
-	r = normalize(-reflect(L, n));
+	//Calculate 2nd lighting (user spotlight)
+		n = normalize(ex_Normal);
+		vec3 test = ex_Light2Pos - ex_PositionEye;
+		L = normalize(test);
+		v = normalize(-ex_PositionEye);
+		r = normalize(-reflect(L, n));
 	
-	RdotV = max(0.0, dot(r, v));
+		RdotV = max(0.0, dot(r, v));
 
-	NdotL = max(dot(n, L),0.0);
+		NdotL = max(dot(n, L),0.0);
 
-	color += light_ambient * material_ambient;
+		color += material_specular * light_specular * pow(RdotV, material_shininess);
+
+	//Calculate 3rd lighting
+		n = normalize(ex_Normal);
+		L = normalize(ex_Light3Pos);
+
+		v = normalize(-ex_PositionEye);
+		r = normalize(-reflect(L, n));
 	
-	if(NdotL > 0.0) 
-	{
-		color += (light_ambient * material_diffuse * NdotL);
-	}
+		RdotV = max(0.0, dot(r, v));
 
-	color += material_specular * light_specular * pow(RdotV, material_shininess);
+		NdotL = max(dot(n, L),0.0);
+
+		color += light_ambient * material_ambient;
+	
+		if(NdotL > 0.0) 
+		{
+			color += (light_ambient * material_diffuse * NdotL);
+		}
+
+		color += material_specular * light_specular * pow(RdotV, material_shininess);
+
+	//Calculate 4th lighting
+		n = normalize(ex_Normal);
+		L = normalize(ex_Light4Pos);
+
+		v = normalize(-ex_PositionEye);
+		r = normalize(-reflect(L, n));
+	
+		RdotV = max(0.0, dot(r, v));
+
+		NdotL = max(dot(n, L),0.0);
+
+		color += light_ambient * material_ambient;
+	
+		if(NdotL > 0.0) 
+		{
+			color += (light_ambient * material_diffuse * NdotL);
+		}
+
+		color += material_specular * light_specular * pow(RdotV, material_shininess);
 
 	//out_Color = color;  //show just lighting
 
