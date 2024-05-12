@@ -1,4 +1,5 @@
 #include "Camera.h"
+#include <iostream>
 
 glm::mat4 Camera::calcMatrix()
 {
@@ -14,33 +15,42 @@ void Camera::render(CShader* shader)
 	glUniformMatrix4fv(glGetUniformLocation(shader->GetProgramObjID(), "ViewMatrix"), 1, GL_FALSE, &calcMatrix()[0][0]);
 }
 
-void Camera::viewCollisionBoxes(CShader* shader, float ferrisAngle)
+void Camera::viewCollisionBoxes(CShader* shader, float ferrisAngle, glm::vec3 carriagePositions[])
 {
-	//ferrisCollision.constructGeometry(shader, -10.75f, 0.0f, -5.0f, 10.75f, 22.25f, 6.5f);
-	//ferrisCollision.render();
+	//Test collision for whole ride
+		//ferrisCollision.constructGeometry(shader, -10.75f, 0.0f, -5.0f, 10.75f, 22.25f, 6.5f);
+		//ferrisCollision.render();
+
+	//Base collision
 	CBox baseCollision;
-	baseCollision.constructGeometry(shader, -10.0f, 0.0f, -5.0f, 10.0f, 1.0f, 5.0f);
+	baseCollision.constructGeometry(shader, -11.5f, 0.0f, -6.5f, 11.5f, 2.5f, 6.5f);
 	baseCollision.render();
 
+	//Left and right parts of stand collision
 	CBox standCollision;
-	standCollision.constructGeometry(shader, -5.0f, 1.0f, -1.0f, 5.0f, 12.5f, 1.0f);
+	standCollision.constructGeometry(shader, -6.5f, 1.0f, -2.5f, 6.5f, 14.0f, 2.5f);
 	standCollision.render();
 
+	//Turning wheel collision
 	CBox movingCollision;
-	movingCollision.constructGeometry(shader, -9.0f, 3.5f, 1.25f, 9.0f, 21.0f, 3.3f);
+	movingCollision.constructGeometry(shader, -10.5f, 2.0f, -0.25f, 10.5f, 22.5f, 4.8f);
 	movingCollision.render();
 
-	glm::mat4 ModelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0, 12, 0));
-	ModelMatrix = glm::rotate(ModelMatrix, ferrisAngle, glm::vec3(0, 0, 1.0));
-	ModelMatrix = glm::translate(ModelMatrix, glm::vec3(0, -8.75f, 5.0f));
-	glm::vec3 testPos = glm::vec3(ModelMatrix[3][0], ModelMatrix[3][1], ModelMatrix[3][2]);
+	//Carriage collisions
+	CBox carriageCollisions[8];
+	for (int i = 0; i < 8; i++)
+	{
+		glm::mat4 ModelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0, 12, 0));
+		ModelMatrix = glm::rotate(ModelMatrix, ferrisAngle, glm::vec3(0, 0, 1.0));
+		ModelMatrix = glm::translate(ModelMatrix, glm::vec3(carriagePositions[i].x, carriagePositions[i].y - 12.0f, 5.0f));
+		glm::vec3 carriagePos = glm::vec3(ModelMatrix[3][0], ModelMatrix[3][1], ModelMatrix[3][2]);
 
-	CBox carriageCollision;
-	carriageCollision.constructGeometry(shader, testPos.x - 2.0f, testPos.y - 1.5f, testPos.z - 1.75f, testPos.x + 2.0f, testPos.y + 1.5f, testPos.z + 1.75f);
-	carriageCollision.render();
+		carriageCollisions[i].constructGeometry(shader, carriagePos.x - 3.5f, carriagePos.y - 2.0, carriagePos.z - 3.5f, carriagePos.x + 3.5f, carriagePos.y + 5.0f, carriagePos.z + 4.5f);
+		carriageCollisions[i].render();
+	}
 }
 
-void Camera::move(char dir, int delta)
+void Camera::move(char dir, int delta, float ferrisAngle, glm::vec3 carriagePositions[])
 {
 	glm::vec3 oldPos = pos;
 	switch (dir)
@@ -65,15 +75,57 @@ void Camera::move(char dir, int delta)
 		pos.y = 1.5f;
 	}
 
+	//Base collision
 	if (
-		pos.x > -10.75f &&
-		pos.x < 10.75f &&
+		pos.x > -11.5f &&
+		pos.x < 11.5f &&
 		pos.y > 0.0f &&
-		pos.y < 22.25f &&
-		pos.z > -5.0f &&
+		pos.y < 2.5f &&
+		pos.z > -6.5f &&
 		pos.z < 6.5f
 		)
 		pos = oldPos;
+	
+	//Left and right parts of stand collision
+	if (
+		pos.x > -6.5f &&
+		pos.x < 6.5f &&
+		pos.y > 1.0f &&
+		pos.y < 14.0f &&
+		pos.z > -2.5f &&
+		pos.z < 2.5f
+		)
+		pos = oldPos;
+
+	//Turning wheel collision
+	if (
+		pos.x > -10.5f &&
+		pos.x < 10.5f &&
+		pos.y > 2.0f &&
+		pos.y < 22.5f &&
+		pos.z > -0.25f &&
+		pos.z < 4.8f
+		)
+		pos = oldPos;
+
+	//Carriage collisions
+	for (int i = 0; i < 8; i++)
+	{
+		glm::mat4 ModelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0, 12, 0));
+		ModelMatrix = glm::rotate(ModelMatrix, ferrisAngle, glm::vec3(0, 0, 1.0));
+		ModelMatrix = glm::translate(ModelMatrix, glm::vec3(carriagePositions[i].x, carriagePositions[i].y - 12.0f, 5.0f));
+		glm::vec3 carriagePos = glm::vec3(ModelMatrix[3][0], ModelMatrix[3][1], ModelMatrix[3][2]);
+
+		if (
+			pos.x > carriagePos.x - 3.5f &&
+			pos.x < carriagePos.x + 3.5f &&
+			pos.y > carriagePos.y - 2.0f &&
+			pos.y < carriagePos.y + 5.0f &&
+			pos.z > carriagePos.z - 3.5f &&
+			pos.z < carriagePos.z + 4.5f
+			)
+			pos = oldPos;
+	}
 }
 
 void Camera::rotate(char dir, int delta)

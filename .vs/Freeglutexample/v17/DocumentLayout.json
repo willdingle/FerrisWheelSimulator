@@ -7,20 +7,12 @@
       "RelativeMoniker": "D:0:0:{472FEE38-34C3-4DC2-8DFC-871F6F80345E}|Freeglutexample.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{472FEE38-34C3-4DC2-8DFC-871F6F80345E}|Freeglutexample.vcxproj|C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\Camera\\Camera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{472FEE38-34C3-4DC2-8DFC-871F6F80345E}|Freeglutexample.vcxproj|solutionrelative:Camera\\Camera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{472FEE38-34C3-4DC2-8DFC-871F6F80345E}|Freeglutexample.vcxproj|C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\glslfiles\\basicTransformations.vert||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{472FEE38-34C3-4DC2-8DFC-871F6F80345E}|Freeglutexample.vcxproj|solutionrelative:glslfiles\\basicTransformations.vert||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{472FEE38-34C3-4DC2-8DFC-871F6F80345E}|Freeglutexample.vcxproj|C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\Camera\\Camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{472FEE38-34C3-4DC2-8DFC-871F6F80345E}|Freeglutexample.vcxproj|solutionrelative:Camera\\Camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{472FEE38-34C3-4DC2-8DFC-871F6F80345E}|Freeglutexample.vcxproj|C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\FerrisWheel\\FerrisWheel.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{472FEE38-34C3-4DC2-8DFC-871F6F80345E}|Freeglutexample.vcxproj|solutionrelative:FerrisWheel\\FerrisWheel.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{472FEE38-34C3-4DC2-8DFC-871F6F80345E}|Freeglutexample.vcxproj|C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\FerrisWheel\\FerrisWheel.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{472FEE38-34C3-4DC2-8DFC-871F6F80345E}|Freeglutexample.vcxproj|solutionrelative:FerrisWheel\\FerrisWheel.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{472FEE38-34C3-4DC2-8DFC-871F6F80345E}|Freeglutexample.vcxproj|C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\glslfiles\\basicTransformations.frag||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{472FEE38-34C3-4DC2-8DFC-871F6F80345E}|Freeglutexample.vcxproj|solutionrelative:glslfiles\\basicTransformations.frag||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,56 +22,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "FerrisWheel.cpp",
-              "DocumentMoniker": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\FerrisWheel\\FerrisWheel.cpp",
-              "RelativeDocumentMoniker": "FerrisWheel\\FerrisWheel.cpp",
-              "ToolTip": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\FerrisWheel\\FerrisWheel.cpp",
-              "RelativeToolTip": "FerrisWheel\\FerrisWheel.cpp",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAADkAAAACAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-05-10T12:49:08.278Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "FerrisWheel.h",
-              "DocumentMoniker": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\FerrisWheel\\FerrisWheel.h",
-              "RelativeDocumentMoniker": "FerrisWheel\\FerrisWheel.h",
-              "ToolTip": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\FerrisWheel\\FerrisWheel.h",
-              "RelativeToolTip": "FerrisWheel\\FerrisWheel.h",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAAB4AAAAYAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-07T15:20:43.519Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Camera.h",
-              "DocumentMoniker": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\Camera\\Camera.h",
-              "RelativeDocumentMoniker": "Camera\\Camera.h",
-              "ToolTip": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\Camera\\Camera.h",
-              "RelativeToolTip": "Camera\\Camera.h",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAACEAAAA9AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-07T15:25:39.47Z",
+              "Title": "basicTransformations.vert",
+              "DocumentMoniker": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\glslfiles\\basicTransformations.vert",
+              "RelativeDocumentMoniker": "glslfiles\\basicTransformations.vert",
+              "ToolTip": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\glslfiles\\basicTransformations.vert",
+              "RelativeToolTip": "glslfiles\\basicTransformations.vert",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-05-12T15:00:41.714Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Camera.cpp",
-              "DocumentMoniker": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\Camera\\Camera.cpp",
-              "RelativeDocumentMoniker": "Camera\\Camera.cpp",
-              "ToolTip": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\Camera\\Camera.cpp",
-              "RelativeToolTip": "Camera\\Camera.cpp",
-              "ViewState": "AQIAADkAAAAAAAAAAAAAACoAAAAmAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-05-07T15:38:47.086Z",
+              "Title": "basicTransformations.frag",
+              "DocumentMoniker": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\glslfiles\\basicTransformations.frag",
+              "RelativeDocumentMoniker": "glslfiles\\basicTransformations.frag",
+              "ToolTip": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\glslfiles\\basicTransformations.frag",
+              "RelativeToolTip": "glslfiles\\basicTransformations.frag",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-05-12T15:00:40.904Z",
               "EditorCaption": ""
             },
             {
@@ -88,9 +56,9 @@
               "Title": "main.cpp",
               "DocumentMoniker": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\main.cpp",
               "RelativeDocumentMoniker": "main.cpp",
-              "ToolTip": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\main.cpp",
-              "RelativeToolTip": "main.cpp",
-              "ViewState": "AQIAAOgAAAAAAAAAAAAtwAIBAAAWAAAA",
+              "ToolTip": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\main.cpp*",
+              "RelativeToolTip": "main.cpp*",
+              "ViewState": "AQIAAFgAAAAAAAAAAAAcwHcAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-03-19T17:43:55.579Z",
               "EditorCaption": ""

@@ -101,7 +101,19 @@ void display()
 	if (amount > 1.0f || amount < -1.5f)
 		temp = -temp;
 	//amount = 0;
-	glUniform1f(glGetUniformLocation(myShader->GetProgramObjID(), "displacement"), amount);
+	//glUniform1f(glGetUniformLocation(myShader->GetProgramObjID(), "displacement"), amount);
+
+	//Light properties
+	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "LightPos"), 1, LightPos);
+	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "SecondLightPos"), 1, SecondLightPos);
+	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "light_ambient"), 1, Light_Ambient_And_Diffuse);
+	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "light_diffuse"), 1, Light_Ambient_And_Diffuse);
+	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "light_specular"), 1, Light_Specular);
+
+	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "material_ambient"), 1, Material_Ambient);
+	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "material_diffuse"), 1, Material_Diffuse);
+	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "material_specular"), 1, Material_Specular);
+	glUniform1f(glGetUniformLocation(myShader->GetProgramObjID(), "material_shininess"), Material_Shininess);
 
 	//translation and rotation for view
 	glm::mat4 viewingMatrix = glm::mat4(1.0f);
@@ -111,7 +123,7 @@ void display()
 		ModelMatrix = glm::rotate(ModelMatrix, ferrisWheel.getAngle(), glm::vec3(0, 0, 1.0));
 		ModelMatrix = glm::translate(ModelMatrix, glm::vec3(0, -8.75f, 5.0f));
 		glm::vec3 camPos = glm::vec3(ModelMatrix[3][0], ModelMatrix[3][1], ModelMatrix[3][2]);
-		camPos.x -= 0.5f;
+		camPos.x += 0.0f;
 		camPos.y += 2.0f;
 		currentCam->setPos(camPos);
 	}
@@ -119,7 +131,7 @@ void display()
 	currentCam->render(myShader);
 	viewingMatrix = currentCam->calcMatrix();
 	if (viewCollisions)
-		currentCam->viewCollisionBoxes(myShader, ferrisWheel.getAngle());
+		currentCam->viewCollisionBoxes(myBasicShader, ferrisWheel.getAngle(), ferrisWheel.getCarriagePositions());
 
 	//Set the projection matrix in the shader
 	GLuint projMatLocation = glGetUniformLocation(myShader->GetProgramObjID(), "ProjectionMatrix");
@@ -137,24 +149,12 @@ void display()
 	ground.DrawElementsUsingVBO(myShader);
 
 	//Light Test Object
-	//ModelMatrix = glm::mat4(1.0f);
-	//ModelViewMatrix = viewingMatrix * ModelMatrix;
-	//glUniformMatrix4fv(glGetUniformLocation(myShader->GetProgramObjID(), "ModelViewMatrix"), 1, GL_FALSE, &ModelViewMatrix[0][0]);
-	//NormalMatrix = glm::inverseTranspose(glm::mat3(ModelViewMatrix));
-	//glUniformMatrix3fv(glGetUniformLocation(myShader->GetProgramObjID(), "NormalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
-	//lightTestObj.DrawElementsUsingVBO(myShader);
-
-	//Light properties
-	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "LightPos"), 1, LightPos);
-	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "SecondLightPos"), 1, SecondLightPos);
-	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "light_ambient"), 1, Light_Ambient_And_Diffuse);
-	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "light_diffuse"), 1, Light_Ambient_And_Diffuse);
-	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "light_specular"), 1, Light_Specular);
-
-	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "material_ambient"), 1, Material_Ambient);
-	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "material_diffuse"), 1, Material_Diffuse);
-	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "material_specular"), 1, Material_Specular);
-	glUniform1f(glGetUniformLocation(myShader->GetProgramObjID(), "material_shininess"), Material_Shininess);
+	ModelMatrix = glm::mat4(1.0f);
+	ModelViewMatrix = viewingMatrix * ModelMatrix;
+	glUniformMatrix4fv(glGetUniformLocation(myShader->GetProgramObjID(), "ModelViewMatrix"), 1, GL_FALSE, &ModelViewMatrix[0][0]);
+	NormalMatrix = glm::inverseTranspose(glm::mat3(ModelViewMatrix));
+	glUniformMatrix3fv(glGetUniformLocation(myShader->GetProgramObjID(), "NormalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
+	lightTestObj.DrawElementsUsingVBO(myShader);
 
 	glFlush();
 	glutSwapBuffers();
@@ -360,19 +360,19 @@ void processKeys()
 	//Camera strafing (free camera only)
 	if (currentCam == &freeCam && a)
 	{
-		freeCam.move('a', deltaTime);
+		freeCam.move('a', deltaTime, ferrisWheel.getAngle(), ferrisWheel.getCarriagePositions());
 	}
 	if (currentCam == &freeCam && d)
 	{
-		freeCam.move('d', deltaTime);
+		freeCam.move('d', deltaTime, ferrisWheel.getAngle(), ferrisWheel.getCarriagePositions());
 	}
 	if (currentCam == &freeCam && w)
 	{
-		freeCam.move('w', deltaTime);
+		freeCam.move('w', deltaTime, ferrisWheel.getAngle(), ferrisWheel.getCarriagePositions());
 	}
 	if (currentCam == &freeCam && s)
 	{
-		freeCam.move('s', deltaTime);
+		freeCam.move('s', deltaTime, ferrisWheel.getAngle(), ferrisWheel.getCarriagePositions());
 	}
 }
 

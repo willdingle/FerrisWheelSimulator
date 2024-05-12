@@ -31,8 +31,8 @@ public:
 
 	glm::mat4 calcMatrix();
 	void render(CShader* shader);
-	void viewCollisionBoxes(CShader* shader, float ferrisAngle);
-	void move(char dir, int delta);
+	void viewCollisionBoxes(CShader* shader, float ferrisAngle, glm::vec3 carriagePositions[]);
+	void move(char dir, int delta, float ferrisAngle, glm::vec3 carriagePositions[]);
 	void rotate(char dir, int delta);
 	void setPitch(float setPitch);
 	void setYaw(float setYaw);

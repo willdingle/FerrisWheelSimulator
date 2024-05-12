@@ -45,4 +45,8 @@ public:
 	{
 		return BcarriageMat;
 	}
+	glm::vec3* getCarriagePositions()
+	{
+		return carriagePositions;
+	}
 };
