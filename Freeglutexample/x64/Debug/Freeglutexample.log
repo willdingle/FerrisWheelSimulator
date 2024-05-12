@@ -1,6 +1,6 @@
 ﻿  main.cpp
 C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\main.cpp(74,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\main.cpp(173,29): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\main.cpp(173,22): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
-C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\main.cpp(173,15): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
+C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\main.cpp(175,29): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
+C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\main.cpp(175,22): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
+C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\main.cpp(175,15): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
   Freeglutexample.vcxproj -> C:\Users\willi\Documents\Uni\2nd Year\Graphics\FerrisWheelSimulator\x64\Debug\Freeglutexample.exe

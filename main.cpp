@@ -37,7 +37,7 @@ COBJLoader objLoader;
 //Camera and view
 #include "Camera/Camera.h"
 Camera freeCam = Camera(glm::vec3(0.0f, 12.0f, 30.0f));
-Camera groundCam = Camera(glm::vec3(10.0f, 1.5f, 30.0f));
+Camera groundCam = Camera(glm::vec3(-10.0f, 1.5f, 30.0f));
 Camera rideCam = Camera(glm::vec3(0.0f, 3.25f, 5.0f));
 Camera *currentCam;
 glm::mat4 ProjectionMatrix;
@@ -109,8 +109,10 @@ void display()
 	{
 		glm::mat4 ModelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0, 12, 0));
 		ModelMatrix = glm::rotate(ModelMatrix, ferrisWheel.getAngle(), glm::vec3(0, 0, 1.0));
-		ModelMatrix = glm::translate(ModelMatrix, glm::vec3(0, -9.0f, 9.0f));
+		ModelMatrix = glm::translate(ModelMatrix, glm::vec3(0, -8.75f, 5.0f));
 		glm::vec3 camPos = glm::vec3(ModelMatrix[3][0], ModelMatrix[3][1], ModelMatrix[3][2]);
+		camPos.x -= 0.5f;
+		camPos.y += 2.0f;
 		currentCam->setPos(camPos);
 	}
 
@@ -135,12 +137,12 @@ void display()
 	ground.DrawElementsUsingVBO(myShader);
 
 	//Light Test Object
-	ModelMatrix = glm::mat4(1.0f);
-	ModelViewMatrix = viewingMatrix * ModelMatrix;
-	glUniformMatrix4fv(glGetUniformLocation(myShader->GetProgramObjID(), "ModelViewMatrix"), 1, GL_FALSE, &ModelViewMatrix[0][0]);
-	NormalMatrix = glm::inverseTranspose(glm::mat3(ModelViewMatrix));
-	glUniformMatrix3fv(glGetUniformLocation(myShader->GetProgramObjID(), "NormalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
-	lightTestObj.DrawElementsUsingVBO(myShader);
+	//ModelMatrix = glm::mat4(1.0f);
+	//ModelViewMatrix = viewingMatrix * ModelMatrix;
+	//glUniformMatrix4fv(glGetUniformLocation(myShader->GetProgramObjID(), "ModelViewMatrix"), 1, GL_FALSE, &ModelViewMatrix[0][0]);
+	//NormalMatrix = glm::inverseTranspose(glm::mat3(ModelViewMatrix));
+	//glUniformMatrix3fv(glGetUniformLocation(myShader->GetProgramObjID(), "NormalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
+	//lightTestObj.DrawElementsUsingVBO(myShader);
 
 	//Light properties
 	glUniform4fv(glGetUniformLocation(myShader->GetProgramObjID(), "LightPos"), 1, LightPos);
@@ -218,7 +220,7 @@ void init()
 
 	currentCam = &freeCam;
 	groundCam.setPitch(20.0f);
-	groundCam.setYaw(-100.0f);
+	groundCam.setYaw(-80.0f);
 	rideCam.setYaw(180.0f);
 
 	/*
