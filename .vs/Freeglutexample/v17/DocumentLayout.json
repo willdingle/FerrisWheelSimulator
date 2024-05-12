@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{472FEE38-34C3-4DC2-8DFC-871F6F80345E}|Freeglutexample.vcxproj|C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\glslfiles\\dirTest.frag||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{472FEE38-34C3-4DC2-8DFC-871F6F80345E}|Freeglutexample.vcxproj|solutionrelative:glslfiles\\dirTest.frag||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{472FEE38-34C3-4DC2-8DFC-871F6F80345E}|Freeglutexample.vcxproj|C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\glslfiles\\dirTest.vert||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{472FEE38-34C3-4DC2-8DFC-871F6F80345E}|Freeglutexample.vcxproj|solutionrelative:glslfiles\\dirTest.vert||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{472FEE38-34C3-4DC2-8DFC-871F6F80345E}|Freeglutexample.vcxproj|C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{472FEE38-34C3-4DC2-8DFC-871F6F80345E}|Freeglutexample.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{472FEE38-34C3-4DC2-8DFC-871F6F80345E}|Freeglutexample.vcxproj|C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\glslfiles\\basicTransformations.vert||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{472FEE38-34C3-4DC2-8DFC-871F6F80345E}|Freeglutexample.vcxproj|solutionrelative:glslfiles\\basicTransformations.vert||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{472FEE38-34C3-4DC2-8DFC-871F6F80345E}|Freeglutexample.vcxproj|C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\glslfiles\\basicTransformations.frag||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{472FEE38-34C3-4DC2-8DFC-871F6F80345E}|Freeglutexample.vcxproj|solutionrelative:glslfiles\\basicTransformations.frag||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,43 +22,43 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "basicTransformations.vert",
-              "DocumentMoniker": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\glslfiles\\basicTransformations.vert",
-              "RelativeDocumentMoniker": "glslfiles\\basicTransformations.vert",
-              "ToolTip": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\glslfiles\\basicTransformations.vert",
-              "RelativeToolTip": "glslfiles\\basicTransformations.vert",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Title": "dirTest.vert",
+              "DocumentMoniker": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\glslfiles\\dirTest.vert",
+              "RelativeDocumentMoniker": "glslfiles\\dirTest.vert",
+              "ToolTip": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\glslfiles\\dirTest.vert",
+              "RelativeToolTip": "glslfiles\\dirTest.vert",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB8AAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-05-12T15:00:41.714Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "basicTransformations.frag",
-              "DocumentMoniker": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\glslfiles\\basicTransformations.frag",
-              "RelativeDocumentMoniker": "glslfiles\\basicTransformations.frag",
-              "ToolTip": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\glslfiles\\basicTransformations.frag",
-              "RelativeToolTip": "glslfiles\\basicTransformations.frag",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-05-12T15:00:40.904Z",
+              "WhenOpened": "2024-05-12T15:08:40.828Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "dirTest.frag",
+              "DocumentMoniker": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\glslfiles\\dirTest.frag",
+              "RelativeDocumentMoniker": "glslfiles\\dirTest.frag",
+              "ToolTip": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\glslfiles\\dirTest.frag",
+              "RelativeToolTip": "glslfiles\\dirTest.frag",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAACAAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-05-12T15:08:39.794Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "main.cpp",
               "DocumentMoniker": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\main.cpp",
               "RelativeDocumentMoniker": "main.cpp",
-              "ToolTip": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\main.cpp*",
-              "RelativeToolTip": "main.cpp*",
-              "ViewState": "AQIAAFgAAAAAAAAAAAAcwHcAAAAcAAAA",
+              "ToolTip": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\main.cpp",
+              "RelativeToolTip": "main.cpp",
+              "ViewState": "AQIAAD8AAAAAAAAAAAAswGoAAABaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-03-19T17:43:55.579Z",
               "EditorCaption": ""

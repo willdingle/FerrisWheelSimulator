@@ -148,5 +148,11 @@
     <None Include="glslfiles\basicTransformationsWithDisplacement.frag">
       <Filter>headers\glslfiles</Filter>
     </None>
+    <None Include="glslfiles\dirTest.frag">
+      <Filter>headers\glslfiles</Filter>
+    </None>
+    <None Include="glslfiles\dirTest.vert">
+      <Filter>headers\glslfiles</Filter>
+    </None>
   </ItemGroup>
 </Project>

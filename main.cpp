@@ -52,7 +52,7 @@ float Material_Shininess = 50;
 float Light_Ambient_And_Diffuse[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
 float Light_Specular[4] = { 1.0f,1.0f,1.0f,1.0f };
 float LightPos[4] = { 100.0f, 100.0f, 100.0f, 0.0f };
-float SecondLightPos[4] = { -100.0f, 100.0f, -100.0f, 0.0f };
+float SecondLightPos[4] = { -15.0f, 12.0f, 5.0f, 0.0f };
 
 //Screen size
 int screenWidth = 1280, screenHeight = 720;
@@ -123,7 +123,6 @@ void display()
 		ModelMatrix = glm::rotate(ModelMatrix, ferrisWheel.getAngle(), glm::vec3(0, 0, 1.0));
 		ModelMatrix = glm::translate(ModelMatrix, glm::vec3(0, -8.75f, 5.0f));
 		glm::vec3 camPos = glm::vec3(ModelMatrix[3][0], ModelMatrix[3][1], ModelMatrix[3][2]);
-		camPos.x += 0.0f;
 		camPos.y += 2.0f;
 		currentCam->setPos(camPos);
 	}
@@ -170,6 +169,7 @@ void reshape(int width, int height)		// Resize the OpenGL window
 	//Set the projection matrix
 	ProjectionMatrix = glm::perspective(glm::radians(60.0f), (GLfloat)screenWidth / (GLfloat)screenHeight, 1.0f, 200.0f);
 }
+
 void init()
 {
 	glClearColor(0.529, 0.808, 0.922, 0.0); //sets the clear colour to sky blue
@@ -177,8 +177,7 @@ void init()
 	//glEnable(GL_CULL_FACE);
 
 	myShader = new CShader();
-	//if(!myShader->CreateShaderProgram("BasicView", "glslfiles/basicTransformationsWithDisplacement.vert", "glslfiles/basicTransformationsWithDisplacement.frag"))
-	if (!myShader->CreateShaderProgram("BasicView", "glslfiles/basicTransformations.vert", "glslfiles/basicTransformations.frag"))
+	if (!myShader->CreateShaderProgram("BasicView", "glslfiles/dirTest.vert", "glslfiles/dirTest.frag"))
 	{
 		cout << "failed to load shader" << endl;
 	}
