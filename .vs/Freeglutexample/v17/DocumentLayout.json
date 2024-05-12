@@ -38,8 +38,7 @@
               "RelativeToolTip": "Camera\\Camera.cpp",
               "ViewState": "AQIAAAkAAAAAAAAAAAAAADYAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-05-12T20:49:19.242Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-12T20:49:19.242Z"
             },
             {
               "$type": "Document",
@@ -49,7 +48,7 @@
               "RelativeDocumentMoniker": "main.cpp",
               "ToolTip": "C:\\Users\\willi\\Documents\\Uni\\2nd Year\\Graphics\\FerrisWheelSimulator\\main.cpp",
               "RelativeToolTip": "main.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAARAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-03-19T17:43:55.579Z",
               "EditorCaption": ""
@@ -64,8 +63,7 @@
               "RelativeToolTip": "glslfiles\\dirTest.vert",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-05-12T15:08:40.828Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-12T15:08:40.828Z"
             },
             {
               "$type": "Document",
@@ -77,8 +75,7 @@
               "RelativeToolTip": "glslfiles\\dirTest.frag",
               "ViewState": "AQIAAEkAAAAAAAAAAAAQwGMAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-05-12T15:08:39.794Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-12T15:08:39.794Z"
             }
           ]
         }
