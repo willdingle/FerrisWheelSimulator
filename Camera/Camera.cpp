@@ -15,29 +15,14 @@ void Camera::render(CShader* shader)
 	glUniformMatrix4fv(glGetUniformLocation(shader->GetProgramObjID(), "ViewMatrix"), 1, GL_FALSE, &calcMatrix()[0][0]);
 }
 
-void Camera::viewCollisionBoxes(CShader* shader, float ferrisAngle, glm::vec3 carriagePositions[])
+void Camera::constructCollisionBoxes(CShader* shader, float ferrisAngle, glm::vec3 carriagePositions[])
 {
-	//Test collision for whole ride
-		//ferrisCollision.constructGeometry(shader, -10.75f, 0.0f, -5.0f, 10.75f, 22.25f, 6.5f);
-		//ferrisCollision.render();
-
-	//Base collision
-	CBox baseCollision;
-	baseCollision.constructGeometry(shader, -11.5f, 0.0f, -6.5f, 11.5f, 2.5f, 6.5f);
-	baseCollision.render();
-
-	//Stand collision
-	CBox standCollision;
-	standCollision.constructGeometry(shader, -6.5f, 1.0f, -2.5f, 6.5f, 14.5f, 2.5f);
-	standCollision.render();
-
-	//Turning wheel collision
-	CBox movingCollision;
-	movingCollision.constructGeometry(shader, -10.5f, 2.0f, -0.25f, 10.5f, 22.5f, 4.8f);
-	movingCollision.render();
+	
+	baseCollision.constructGeometry(shader, -11.5f, 0.0f, -6.5f, 11.5f, 2.5f, 6.5f); //Base collision
+	standCollision.constructGeometry(shader, -6.5f, 1.0f, -2.5f, 6.5f, 14.5f, 2.5f); //Stand collision
+	movingCollision.constructGeometry(shader, -10.5f, 2.0f, -0.25f, 10.5f, 22.5f, 4.8f); //Moving wheel collision
 
 	//Carriage collisions
-	CBox carriageCollisions[8];
 	for (int i = 0; i < 8; i++)
 	{
 		glm::mat4 ModelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0, 12, 0));
@@ -46,12 +31,42 @@ void Camera::viewCollisionBoxes(CShader* shader, float ferrisAngle, glm::vec3 ca
 		glm::vec3 carriagePos = glm::vec3(ModelMatrix[3][0], ModelMatrix[3][1], ModelMatrix[3][2]);
 
 		carriageCollisions[i].constructGeometry(shader, carriagePos.x - 3.5f, carriagePos.y - 2.0, carriagePos.z - 3.5f, carriagePos.x + 3.5f, carriagePos.y + 5.0f, carriagePos.z + 4.5f);
+	}
+
+	//Light test object collision
+	lightTestCollision.constructGeometry(shader, -27.5f, 0.0f, -6.5f, -22.5f, 21.5f, 16.5f);
+
+}
+
+void Camera::viewCollisionBoxes(CShader* shader, float ferrisAngle, glm::vec3 carriagePositions[])
+{
+	//Test collision for whole ride
+		//ferrisCollision.constructGeometry(shader, -10.75f, 0.0f, -5.0f, 10.75f, 22.25f, 6.5f);
+		//ferrisCollision.render();
+
+	//Base collision
+	baseCollision.render();
+
+	//Stand collision
+	standCollision.render();
+
+	//Turning wheel collision
+	movingCollision.render();
+
+	//Carriage collisions
+	for (int i = 0; i < 8; i++)
+	{
+		glm::mat4 ModelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0, 12, 0));
+		ModelMatrix = glm::rotate(ModelMatrix, ferrisAngle, glm::vec3(0, 0, 1.0));
+		ModelMatrix = glm::translate(ModelMatrix, glm::vec3(carriagePositions[i].x, carriagePositions[i].y - 12.0f, 5.0f));
+		glm::vec3 carriagePos = glm::vec3(ModelMatrix[3][0], ModelMatrix[3][1], ModelMatrix[3][2]);
+
+		//The line below causes memory leaks. The collisions for the carriages are still updated every frame in the move() method, however
+		//carriageCollisions[i].constructGeometry(shader, carriagePos.x - 3.5f, carriagePos.y - 2.0, carriagePos.z - 3.5f, carriagePos.x + 3.5f, carriagePos.y + 5.0f, carriagePos.z + 4.5f);
 		carriageCollisions[i].render();
 	}
 
 	//Light test object collision
-	CBox lightTestCollision;
-	lightTestCollision.constructGeometry(shader, -27.5f, 0.0f, -6.5f, -22.5f, 21.5f, 16.5f);
 	lightTestCollision.render();
 }
 

@@ -114,6 +114,10 @@ void FerrisWheel::render(glm::mat4 viewingMatrix, CShader* shader, int delta)
 	}
 
 	std::cout << "Speed:" << speed << ", Target:" << deltaTargetSpeed << std::endl;
+	std::cout << "Speed:" << speed << ", Target:" << deltaTargetSpeed << std::endl;
+	std::cout << "Speed:" << speed << ", Target:" << deltaTargetSpeed << std::endl;
+	std::cout << "Speed:" << speed << ", Target:" << deltaTargetSpeed << std::endl;
+	std::cout << "Speed:" << speed << ", Target:" << deltaTargetSpeed << std::endl;
 
 	angle += speed;
 	prevDelta = delta;

@@ -130,7 +130,7 @@ void display()
 	viewingMatrix = currentCam->calcMatrix();
 	glUniformMatrix4fv(glGetUniformLocation(myShader->GetProgramObjID(), "ViewMatrix"), 1, GL_FALSE, &viewingMatrix[0][0]);
 	if (viewCollisions)
-		currentCam->viewCollisionBoxes(myBasicShader, ferrisWheel.getAngle(), ferrisWheel.getCarriagePositions());
+		currentCam->viewCollisionBoxes(myShader, ferrisWheel.getAngle(), ferrisWheel.getCarriagePositions());
 
 	//Set the projection matrix in the shader
 	GLuint projMatLocation = glGetUniformLocation(myShader->GetProgramObjID(), "ProjectionMatrix");
@@ -216,6 +216,8 @@ void init()
 	{
 		std::cout << " model failed to load " << std::endl;
 	}
+
+	freeCam.constructCollisionBoxes(myShader, ferrisWheel.getAngle(), ferrisWheel.getCarriagePositions());
 
 	currentCam = &freeCam;
 	groundCam.setPitch(20.0f);

@@ -14,7 +14,7 @@ class Camera
 private:
 	glm::vec3 pos, front, up, dir;
 	float pitch, yaw, speed;
-	CBox ferrisCollision;
+	CBox ferrisCollision, baseCollision, standCollision, movingCollision, carriageCollisions[8], lightTestCollision;
 
 public:
 	Camera(glm::vec3 setPos)
@@ -31,6 +31,7 @@ public:
 
 	glm::mat4 calcMatrix();
 	void render(CShader* shader);
+	void constructCollisionBoxes(CShader* shader, float ferrisAngle, glm::vec3 carriagePositions[]);
 	void viewCollisionBoxes(CShader* shader, float ferrisAngle, glm::vec3 carriagePositions[]);
 	void move(char dir, int delta, float ferrisAngle, glm::vec3 carriagePositions[]);
 	void rotate(char dir, int delta);
