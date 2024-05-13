@@ -19,7 +19,7 @@ void Camera::constructCollisionBoxes(CShader* shader, float ferrisAngle, glm::ve
 {
 	
 	baseCollision.constructGeometry(shader, -11.5f, 0.0f, -6.5f, 11.5f, 2.5f, 6.5f); //Base collision
-	standCollision.constructGeometry(shader, -6.5f, 1.0f, -2.5f, 6.5f, 14.5f, 2.5f); //Stand collision
+	standCollision.constructGeometry(shader, -6.5f, 1.0f, -2.5f, 6.5f, 15.0f, 2.5f); //Stand collision
 	movingCollision.constructGeometry(shader, -10.5f, 2.0f, -0.25f, 10.5f, 22.5f, 4.8f); //Moving wheel collision
 
 	//Carriage collisions
@@ -111,7 +111,7 @@ void Camera::move(char dir, int delta, float ferrisAngle, glm::vec3 carriagePosi
 		pos.x > -6.5f &&
 		pos.x < 6.5f &&
 		pos.y > 1.0f &&
-		pos.y < 14.0f &&
+		pos.y < 15.0f &&
 		pos.z > -2.5f &&
 		pos.z < 2.5f
 		)
