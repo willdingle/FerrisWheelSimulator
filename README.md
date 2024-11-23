@@ -1,5 +1,5 @@
 # Ferris Wheel Simulator
-Programmed in C++ and OpenGL. Models made in Blender.
+A 3D simulation of a ferris wheel programmed in C++ and OpenGL. Models made in Blender.
 
 ## How To Use
 - Start the ferris wheel: HOME
